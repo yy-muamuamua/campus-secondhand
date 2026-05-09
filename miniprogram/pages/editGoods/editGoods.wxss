@@ -1,0 +1,55 @@
+.page {
+  padding: 30rpx;
+}
+.form {
+  background: #fff;
+  border-radius: 16rpx;
+  padding: 20rpx;
+  margin-bottom: 40rpx;
+}
+.form-item {
+  margin-bottom: 30rpx;
+}
+.label {
+  display: block;
+  font-size: 32rpx;
+  margin-bottom: 10rpx;
+  color: #333;
+}
+.form-item input, .form-item textarea, .form-item picker {
+  border: 1px solid #ddd;
+  padding: 20rpx;
+  border-radius: 8rpx;
+  width: 100%;
+  box-sizing: border-box;
+}
+.image-list {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 20rpx;
+}
+.image-item {
+  position: relative;
+  width: 200rpx;
+  height: 200rpx;
+  margin-right: 20rpx;
+  margin-bottom: 20rpx;
+}
+.image-item image {
+  width: 100%;
+  height: 100%;
+  border-radius: 8rpx;
+}
+.image-item icon {
+  position: absolute;
+  top: -10rpx;
+  right: -10rpx;
+}
+button {
+  width: 90%;
+}
+.loading {
+  text-align: center;
+  padding: 100rpx 0;
+  color: #999;
+}

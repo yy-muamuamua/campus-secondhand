@@ -1,0 +1,42 @@
+<view class="publish-container">
+  <view class="form-item">
+    <text class="label">标题</text>
+    <input placeholder="请输入标题" bindinput="onTitleInput" value="{{title}}" />
+  </view>
+
+  <view class="form-item">
+    <text class="label">描述</text>
+    <textarea placeholder="请输入商品描述" bindinput="onDescInput" value="{{description}}" auto-height />
+  </view>
+
+  <view class="form-item">
+    <text class="label">价格</text>
+    <input placeholder="请输入价格" type="number" bindinput="onPriceInput" value="{{price}}" />
+  </view>
+
+  <view class="form-item">
+    <text class="label">分类</text>
+    <picker bindchange="onCategoryChange" value="{{categoryIndex}}" range="{{categories}}">
+      <view>{{category}}</view>
+    </picker>
+  </view>
+
+  <view class="form-item">
+    <text class="label">图片</text>
+    <view class="upload-btn">
+      <button bindtap="uploadImages">选择图片</button>
+    </view>
+    <view class="image-list">
+      <view wx:for="{{images}}" wx:key="index" class="image-item">
+        <image src="{{item}}" mode="aspectFill" />
+        <view class="remove-image" bindtap="onRemoveImage" data-index="{{index}}">×</view>
+      </view>
+    </view>
+  </view>
+
+  <view class="publish-btn">
+    <button type="primary" bindtap="onPublish" disabled="{{isPublishing}}">
+      {{isPublishing ? '发布中...' : '发布'}}
+    </button>
+  </view>
+</view>

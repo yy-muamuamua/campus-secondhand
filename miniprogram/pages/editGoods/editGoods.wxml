@@ -1,0 +1,53 @@
+<view class="page" wx:if="{{!loading}}">
+  <view class="form">
+    <!-- 标题 -->
+    <view class="form-item">
+      <text class="label">标题</text>
+      <input placeholder="请输入标题" bindinput="onTitleInput" value="{{title}}" />
+    </view>
+
+    <!-- 描述 -->
+    <view class="form-item">
+      <text class="label">描述</text>
+      <textarea placeholder="请输入商品描述" bindinput="onDescInput" value="{{description}}" auto-height />
+    </view>
+
+    <!-- 价格 -->
+    <view class="form-item">
+      <text class="label">价格</text>
+      <input placeholder="请输入价格" type="number" bindinput="onPriceInput" value="{{price}}" />
+    </view>
+
+    <!-- 分类 -->
+    <view class="form-item">
+      <text class="label">分类</text>
+      <picker bindchange="onCategoryChange" value="{{categoryIndex}}" range="{{categories}}">
+        <view>{{category}}</view>
+      </picker>
+    </view>
+
+    <!-- 图片 -->
+    <view class="form-item">
+      <text class="label">图片</text>
+      <button size="mini" bindtap="uploadImages">添加图片</button>
+    </view>
+
+    <!-- 原图预览 + 新图预览 -->
+    <view class="image-list">
+      <!-- 原图（带删除） -->
+      <view wx:for="{{originalImages}}" wx:key="index" class="image-item">
+        <image src="{{item}}" mode="aspectFill" />
+        <icon type="cancel" size="20" bindtap="removeImage" data-index="{{index}}" data-type="original" />
+      </view>
+      <!-- 新选图片（带删除） -->
+      <view wx:for="{{images}}" wx:key="index" class="image-item">
+        <image src="{{item}}" mode="aspectFill" />
+        <icon type="cancel" size="20" bindtap="removeImage" data-index="{{index}}" data-type="new" />
+      </view>
+    </view>
+  </view>
+
+  <button type="primary" bindtap="save" loading="{{saving}}" disabled="{{saving}}">保存修改</button>
+</view>
+
+<view class="loading" wx:if="{{loading}}">加载中...</view>

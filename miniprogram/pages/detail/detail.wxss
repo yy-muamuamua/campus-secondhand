@@ -1,0 +1,379 @@
+.page {
+  padding-bottom: 120rpx; /* 为底部操作栏留出空间 */
+  min-height: 100vh;
+}
+
+/* 图片轮播 */
+swiper {
+  height: 600rpx;
+  background: #f5f5f5;
+}
+
+swiper image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* 商品信息 */
+.info-box {
+  background: var(--card-background);
+  padding: 32rpx;
+  margin-bottom: 16rpx;
+  box-shadow: var(--shadow-sm);
+  border-radius: 0 0 var(--radius-md) var(--radius-md);
+  margin-top: -20rpx;
+  position: relative;
+  z-index: 10;
+}
+
+.title {
+  display: block;
+  font-size: 36rpx;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 16rpx;
+  line-height: 1.4;
+}
+
+.price {
+  display: block;
+  font-size: 44rpx;
+  color: var(--secondary-color);
+  font-weight: 600;
+  margin-bottom: 20rpx;
+}
+
+.description {
+  display: block;
+  font-size: 30rpx;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin-bottom: 20rpx;
+  white-space: pre-wrap;
+}
+
+.meta {
+  font-size: 26rpx;
+  color: var(--text-tertiary);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24rpx;
+  padding-top: 16rpx;
+  border-top: 1rpx solid var(--border-color);
+}
+
+/* 卖家信息 */
+.seller-box {
+  background: var(--card-background);
+  padding: 32rpx;
+  margin-bottom: 16rpx;
+  box-shadow: var(--shadow-sm);
+  border-radius: var(--radius-md);
+}
+
+.label {
+  font-size: 32rpx;
+  font-weight: 600;
+  color: var(--text-primary);
+  display: block;
+  margin-bottom: 20rpx;
+}
+
+.seller {
+  display: flex;
+  align-items: center;
+  padding: 16rpx 0;
+}
+
+.seller image {
+  width: 88rpx;
+  height: 88rpx;
+  border-radius: 50%;
+  margin-right: 24rpx;
+  border: 2rpx solid var(--border-color);
+}
+
+.seller .info {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.seller .info text:first-child {
+  font-size: 32rpx;
+  font-weight: 500;
+  color: var(--text-primary);
+  margin-bottom: 8rpx;
+}
+
+.seller .info text:last-child {
+  font-size: 28rpx;
+  color: var(--text-secondary);
+}
+
+/* 操作按钮 */
+.action-buttons {
+  display: flex;
+  gap: 16rpx;
+  padding: 0 32rpx 20rpx;
+}
+
+.action-buttons button {
+  flex: 1;
+  margin: 0;
+  height: 72rpx;
+  font-size: 30rpx;
+  border-radius: var(--radius-md);
+}
+
+/* 留言区域 */
+.message-section {
+  background: var(--card-background);
+  padding: 32rpx;
+  margin-top: 16rpx;
+  box-shadow: var(--shadow-sm);
+  border-radius: var(--radius-md);
+  margin-bottom: 120rpx;
+}
+
+.section-title {
+  font-size: 32rpx;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 24rpx;
+  display: flex;
+  align-items: center;
+  gap: 12rpx;
+}
+
+.section-title::before {
+  content: '';
+  width: 4rpx;
+  height: 28rpx;
+  background: var(--primary-color);
+  border-radius: 2rpx;
+}
+
+.message-item {
+  padding: 24rpx 0;
+  border-bottom: 1rpx solid var(--border-color);
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+.message-item:last-child {
+  border-bottom: none;
+}
+
+.message-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 16rpx;
+}
+
+.avatar {
+  width: 64rpx;
+  height: 64rpx;
+  border-radius: 50%;
+  margin-right: 20rpx;
+  border: 1rpx solid var(--border-color);
+}
+
+.nickname {
+  font-size: 28rpx;
+  color: var(--text-primary);
+  font-weight: 500;
+  flex: 1;
+}
+
+.time {
+  font-size: 24rpx;
+  color: var(--text-tertiary);
+}
+
+.message-content {
+  font-size: 30rpx;
+  color: var(--text-primary);
+  margin-left: 84rpx;
+  margin-bottom: 16rpx;
+  line-height: 1.5;
+  white-space: pre-wrap;
+}
+
+.reply-box {
+  background: var(--primary-light);
+  padding: 20rpx;
+  border-radius: var(--radius-sm);
+  margin-left: 84rpx;
+  margin-top: 12rpx;
+  font-size: 28rpx;
+  color: var(--text-secondary);
+  border-left: 4rpx solid var(--primary-color);
+}
+
+.reply-label {
+  font-weight: 500;
+  margin-right: 12rpx;
+  color: var(--primary-color);
+}
+
+.reply-time {
+  display: block;
+  font-size: 24rpx;
+  color: var(--text-tertiary);
+  margin-top: 8rpx;
+  text-align: right;
+}
+
+.reply-action {
+  margin-left: 84rpx;
+  margin-top: 12rpx;
+}
+
+.reply-action button {
+  font-size: 26rpx;
+  padding: 8rpx 24rpx;
+  margin: 0;
+}
+
+.reply-input-area {
+  margin-left: 84rpx;
+  margin-top: 16rpx;
+  display: flex;
+  align-items: center;
+  gap: 12rpx;
+  padding: 16rpx;
+  background: var(--background-color);
+  border-radius: var(--radius-md);
+}
+
+.reply-input-area input {
+  flex: 1;
+  border: none;
+  background: transparent;
+  padding: 0;
+  font-size: 28rpx;
+}
+
+.reply-input-area button {
+  margin: 0;
+  padding: 8rpx 24rpx;
+  font-size: 26rpx;
+}
+
+.message-input {
+  margin-top: 32rpx;
+  display: flex;
+  align-items: flex-end;
+  gap: 16rpx;
+  padding: 20rpx;
+  background: var(--background-color);
+  border-radius: var(--radius-md);
+}
+
+.message-input textarea {
+  flex: 1;
+  border: none;
+  background: transparent;
+  padding: 0;
+  min-height: 80rpx;
+  font-size: 28rpx;
+  color: var(--text-primary);
+  resize: none;
+}
+
+.message-input button {
+  margin: 0;
+  padding: 12rpx 32rpx;
+  font-size: 28rpx;
+  align-self: flex-end;
+}
+
+/* 底部操作栏 */
+.action-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: var(--card-background);
+  box-shadow: 0 -2rpx 12rpx rgba(0, 0, 0, 0.08);
+  display: flex;
+  align-items: center;
+  padding: 16rpx 32rpx;
+  gap: 16rpx;
+  z-index: 1000;
+}
+
+.action-bar button {
+  flex: 1;
+  margin: 0;
+  height: 64rpx;
+  font-size: 28rpx;
+  border-radius: var(--radius-md);
+}
+
+/* 卖家操作 */
+.seller-action {
+  position: fixed;
+  bottom: 100rpx;
+  right: 30rpx;
+  z-index: 999;
+}
+
+.seller-action button {
+  margin: 0;
+  padding: 12rpx 32rpx;
+  font-size: 28rpx;
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-md);
+}
+
+/* 加载状态 */
+.loading {
+  text-align: center;
+  padding: 150rpx 0;
+  color: var(--text-tertiary);
+  font-size: 28rpx;
+}
+
+/* 响应式设计 */
+@media screen and (min-width: 750rpx) {
+  swiper {
+    height: 700rpx;
+  }
+  
+  .info-box,
+  .seller-box,
+  .message-section {
+    margin: 0 auto 16rpx;
+    max-width: 750rpx;
+    border-radius: var(--radius-md);
+  }
+  
+  .action-bar {
+    max-width: 750rpx;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: var(--radius-md) var(--radius-md) 0 0;
+  }
+}
+
+@media screen and (max-width: 375rpx) {
+  swiper {
+    height: 500rpx;
+  }
+  
+  .info-box,
+  .seller-box,
+  .message-section {
+    padding: 24rpx;
+  }
+  
+  .title {
+    font-size: 32rpx;
+  }
+  
+  .price {
+    font-size: 38rpx;
+  }
+}

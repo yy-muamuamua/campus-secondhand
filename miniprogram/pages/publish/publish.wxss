@@ -1,0 +1,234 @@
+.publish-container {
+  padding: 32rpx 24rpx;
+  min-height: 100vh;
+  background: var(--background-color);
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.form-item {
+  margin-bottom: 36rpx;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+.label {
+  display: block;
+  font-size: 30rpx;
+  font-weight: 500;
+  margin-bottom: 16rpx;
+  color: var(--text-primary);
+  padding-left: 8rpx;
+  border-left: 4rpx solid var(--primary-color);
+}
+
+input, textarea, picker {
+  border: 1rpx solid var(--border-color);
+  padding: 24rpx 24rpx;
+  border-radius: var(--radius-md);
+  width: 100%;
+  box-sizing: border-box;
+  font-size: 28rpx;
+  color: var(--text-primary);
+  background: var(--card-background);
+  transition: all 0.3s ease;
+  min-width: 100%;
+  min-height: 90rpx;
+  line-height: 1.5;
+  z-index: 1;
+  position: relative;
+}
+
+/* 确保输入框内容不被遮挡 */
+input {
+  height: 90rpx;
+  overflow: visible;
+}
+
+textarea {
+  min-height: 180rpx;
+  overflow: auto;
+}
+
+/* 修复placeholder文本显示 */
+input::placeholder, textarea::placeholder {
+  color: var(--text-tertiary);
+  font-size: 28rpx;
+  line-height: 1.5;
+}
+
+input:focus, textarea:focus {
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 2rpx var(--primary-light);
+  outline: none;
+}
+
+textarea {
+  min-height: 160rpx;
+  resize: none;
+  line-height: 1.5;
+}
+
+/* 分类选择器 */
+picker {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--card-background);
+  cursor: pointer;
+}
+
+picker::after {
+  content: '›';
+  font-size: 36rpx;
+  color: var(--text-tertiary);
+  font-weight: bold;
+}
+
+/* 图片上传区域 */
+.image-upload {
+  margin-top: 16rpx;
+}
+
+.image-list {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 20rpx;
+  gap: 16rpx;
+}
+
+.image-item {
+  position: relative;
+  width: 200rpx;
+  height: 200rpx;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  transition: all 0.3s ease;
+}
+
+.image-item:hover {
+  transform: translateY(-4rpx);
+  box-shadow: var(--shadow-md);
+}
+
+.image-item image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: var(--radius-md);
+}
+
+.remove-image {
+  position: absolute;
+  top: 8rpx;
+  right: 8rpx;
+  width: 40rpx;
+  height: 40rpx;
+  background: rgba(0, 0, 0, 0.6);
+  color: #fff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24rpx;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.remove-image:hover {
+  background: var(--error-color);
+  transform: scale(1.1);
+}
+
+/* 选择图片按钮 */
+.upload-btn {
+  margin-top: 8rpx;
+  margin-bottom: 16rpx;
+}
+
+.upload-btn button {
+  width: 100%;
+  font-size: 28rpx;
+  border-radius: var(--radius-md);
+  padding: 16rpx 0;
+  transition: all 0.3s ease;
+  background: var(--primary-light);
+  color: var(--primary-color);
+  border: 1rpx solid var(--primary-color);
+}
+
+.upload-btn button:hover {
+  background: var(--primary-color);
+  color: #fff;
+}
+
+/* 发布按钮 */
+.publish-btn {
+  margin-top: 60rpx;
+  margin-bottom: 120rpx; /* 为底部导航留出空间 */
+  width: 100%;
+}
+
+.publish-btn button {
+  width: 100%;
+  font-size: 32rpx;
+  font-weight: 500;
+  border-radius: var(--radius-md);
+  padding: 24rpx 0;
+  transition: all 0.3s ease;
+  background: var(--primary-color);
+  color: #fff;
+  position: relative;
+  z-index: 100;
+}
+
+.publish-btn button:hover {
+  background: #05a850;
+  transform: translateY(-2rpx);
+  box-shadow: var(--shadow-md);
+}
+
+.publish-btn button[disabled] {
+  background: var(--text-tertiary);
+  transform: none;
+  box-shadow: none;
+}
+
+/* 响应式设计 */
+@media screen and (min-width: 750rpx) {
+  .publish-container {
+    max-width: 750rpx;
+    margin: 0 auto;
+    padding: 40rpx 32rpx;
+  }
+  
+  .image-item {
+    width: 220rpx;
+    height: 220rpx;
+  }
+  
+  .publish-btn {
+    margin-top: 60rpx;
+  }
+}
+
+@media screen and (max-width: 375rpx) {
+  .publish-container {
+    padding: 24rpx 16rpx;
+  }
+  
+  .form-item {
+    margin-bottom: 28rpx;
+  }
+  
+  .image-item {
+    width: 160rpx;
+    height: 160rpx;
+  }
+  
+  .publish-btn {
+    margin-top: 40rpx;
+  }
+}

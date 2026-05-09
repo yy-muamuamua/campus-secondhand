@@ -1,0 +1,89 @@
+<view class="page" wx:if="{{!loading && goodsInfo}}">
+  <swiper indicator-dots autoplay circular interval="3000" duration="500">
+    <swiper-item wx:for="{{goodsInfo.images}}" wx:key="index">
+      <image src="{{item}}" mode="aspectFill" bindtap="previewImage" data-index="{{index}}" />
+    </swiper-item>
+  </swiper>
+
+  <view class="info-box">
+    <text class="title">{{goodsInfo.title}}</text>
+    <text class="price">¥{{goodsInfo.price}}</text>
+    <text class="description">{{goodsInfo.description}}</text>
+    <view class="meta">
+      <text>分类：{{goodsInfo.category}}</text>
+      <text>浏览 {{goodsInfo.views}} 次</text>
+      <text>发布时间：{{formatTime(goodsInfo.create_time)}}</text>
+    </view>
+  </view>
+
+  <view class="seller-box">
+    <text class="label">卖家信息</text>
+    <view class="seller">
+      <image src="{{sellerInfo.avatar || '/images/default-avatar.png'}}" />
+      <view class="info">
+        <text>{{sellerInfo.nickname || '微信用户'}}</text>
+        <text wx:if="{{sellerInfo.contact_wechat}}">微信号：{{sellerInfo.contact_wechat}}</text>
+        <text wx:else>未设置微信号</text>
+      </view>
+    </view>
+  </view>
+
+  <button type="primary" bindtap="contactSeller" wx:if="{{sellerInfo.contact_wechat}}">复制微信号联系卖家</button>
+  <button disabled wx:else>卖家未留联系方式</button>
+</view>
+
+<view class="loading" wx:if="{{loading}}">加载中...</view>
+
+<!--收藏按钮-->
+<view class="action-bar">
+  <button bindtap="toggleFavorite" type="{{isFavorited ? 'default' : 'primary'}}">
+    {{isFavorited ? '取消收藏' : '收藏'}}
+  </button>
+  <!-- 原有的联系卖家按钮等保持不变 -->
+</view>
+
+<!--已售按钮-->
+<view wx:if="{{isSeller && goodsInfo.status === 'on'}}" class="seller-action">
+  <button type="warn" bindtap="markAsSold">标记为已售</button>
+</view>
+
+<!-- 留言区域 -->
+<view class="message-section">
+  <view class="section-title">留言咨询</view>
+
+  <!-- 留言列表 -->
+  <view class="message-list">
+    <view wx:for="{{messages}}" wx:key="_id" class="message-item">
+      <view class="message-header">
+        <image src="{{item.userInfo.avatar || '/images/default-avatar.png'}}" class="avatar" />
+        <text class="nickname">{{item.userInfo.nickname}}</text>
+        <text class="time">{{formatTime(item.create_time)}}</text>
+      </view>
+      <view class="message-content">{{item.content}}</view>
+
+      <!-- 卖家回复 -->
+      <view wx:if="{{item.reply}}" class="reply-box">
+        <text class="reply-label">卖家回复：</text>
+        <text>{{item.reply}}</text>
+        <text class="reply-time">{{formatTime(item.reply_time)}}</text>
+      </view>
+
+      <!-- 卖家回复按钮（仅卖家可见） -->
+      <view wx:if="{{isSeller && !item.reply}}" class="reply-action">
+        <button size="mini" bindtap="toggleReply" data-id="{{item._id}}">回复</button>
+      </view>
+
+      <!-- 回复输入框 -->
+      <view wx:if="{{showReplyInput === item._id}}" class="reply-input-area">
+        <input placeholder="输入回复内容" bindinput="onReplyInput" data-id="{{item._id}}" value="{{replyContent[item._id]}}" />
+        <button size="mini" type="primary" bindtap="submitReply" data-id="{{item._id}}">提交</button>
+      </view>
+    </view>
+  </view>
+
+  <!-- 发表留言（需登录） -->
+  <view class="message-input">
+    <textarea placeholder="写下你的问题..." bindinput="onMessageInput" value="{{messageContent}}" auto-height />
+    <button size="mini" type="primary" bindtap="submitMessage">发布</button>
+  </view>
+</view>

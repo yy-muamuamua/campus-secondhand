@@ -1,0 +1,88 @@
+<!--pages/settings/settings.wxml-->
+<view class="page">
+  <!-- 页面标题 -->
+  <view class="header">
+    <text class="title">设置</text>
+  </view>
+
+  <!-- 设置菜单 -->
+  <view class="menu">
+    <!-- 个人信息设置 -->
+    <view class="menu-section">
+      <text class="section-title">个人信息</text>
+      <view class="menu-item" bindtap="goToEditProfile">
+        <text class="item-icon">👤</text>
+        <text class="item-text">编辑个人资料</text>
+        <text class="arrow">›</text>
+      </view>
+      <view class="menu-item" bindtap="goToChangePassword">
+        <text class="item-icon">🔒</text>
+        <text class="item-text">修改密码</text>
+        <text class="arrow">›</text>
+      </view>
+    </view>
+
+    <!-- 账号安全 -->
+    <view class="menu-section">
+      <text class="section-title">账号安全</text>
+      <view class="menu-item" bindtap="goToBindEmail">
+        <text class="item-icon">📧</text>
+        <text class="item-text">绑定邮箱</text>
+        <text class="arrow">›</text>
+      </view>
+      <view class="menu-item" bindtap="goToBindPhone">
+        <text class="item-icon">📱</text>
+        <text class="item-text">绑定手机号</text>
+        <text class="arrow">›</text>
+      </view>
+    </view>
+
+    <!-- 通知设置 -->
+    <view class="menu-section">
+      <text class="section-title">通知设置</text>
+      <view class="menu-item" bindtap="toggleMessageNotification">
+        <text class="item-icon">💬</text>
+        <text class="item-text">消息通知</text>
+        <switch 
+          class="switch" 
+          checked="{{messageNotification}}" 
+          bindchange="toggleMessageNotification"
+        />
+      </view>
+      <view class="menu-item" bindtap="toggleSystemNotification">
+        <text class="item-icon">🔔</text>
+        <text class="item-text">系统通知</text>
+        <switch 
+          class="switch" 
+          checked="{{systemNotification}}" 
+          bindchange="toggleSystemNotification"
+        />
+      </view>
+    </view>
+
+    <!-- 关于我们 -->
+    <view class="menu-section">
+      <text class="section-title">关于</text>
+      <view class="menu-item" bindtap="goToAbout">
+        <text class="item-icon">ℹ️</text>
+        <text class="item-text">关于我们</text>
+        <text class="arrow">›</text>
+      </view>
+      <view class="menu-item" bindtap="goToFeedback">
+        <text class="item-icon">📝</text>
+        <text class="item-text">意见反馈</text>
+        <text class="arrow">›</text>
+      </view>
+      <view class="menu-item" bindtap="goToPrivacy">
+        <text class="item-icon">🔒</text>
+        <text class="item-text">隐私政策</text>
+        <text class="arrow">›</text>
+      </view>
+    </view>
+
+    <!-- 退出登录 -->
+    <view class="logout-section">
+      <button class="logout-btn" bindtap="logout">退出登录</button>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,99 @@
+<view class="page">
+  <!-- 顶部选项卡 -->
+  <view class="tabs">
+    <view class="tab-item {{currentTab === 0 ? 'active' : ''}}" bindtap="switchTab" data-index="0">统计</view>
+    <view class="tab-item {{currentTab === 1 ? 'active' : ''}}" bindtap="switchTab" data-index="1">商品管理</view>
+    <view class="tab-item {{currentTab === 2 ? 'active' : ''}}" bindtap="switchTab" data-index="2">用户管理</view>
+    <view class="tab-item {{currentTab === 3 ? 'active' : ''}}" bindtap="switchTab" data-index="3">留言管理</view>
+  </view>
+
+  <!-- 统计面板 -->
+  <view class="panel" wx:if="{{currentTab === 0}}">
+    <view class="stat-card">
+      <text class="title">总用户数</text>
+      <text class="number">{{statistics.totalUsers}}</text>
+    </view>
+    <view class="stat-card">
+      <text class="title">总商品数</text>
+      <text class="number">{{statistics.totalGoods}}</text>
+    </view>
+    <view class="stat-card">
+      <text class="title">总留言数</text>
+      <text class="number">{{statistics.totalMessages}}</text>
+    </view>
+    <view class="stat-card">
+      <text class="title">今日新增商品</text>
+      <text class="number">{{statistics.todayGoods}}</text>
+    </view>
+    <view class="stat-card">
+      <text class="title">今日新增留言</text>
+      <text class="number">{{statistics.todayMessages}}</text>
+    </view>
+  </view>
+
+  <!-- 商品管理面板 -->
+  <view class="panel" wx:if="{{currentTab === 1}}">
+    <view class="filter-bar">
+      <picker bindchange="onStatusChange" value="{{statusIndex}}" range="{{statusOptions}}">
+        <view class="picker">状态：{{statusOptions[statusIndex]}}</view>
+      </picker>
+    </view>
+    <view class="goods-list">
+      <view wx:for="{{goodsList}}" wx:key="_id" class="goods-item">
+        <image src="{{item.images && item.images[0] ? item.images[0] : '/images/default.png'}}" mode="aspectFill" />
+        <view class="info">
+          <text class="title">{{item.title}}</text>
+          <text class="price">¥{{item.price}}</text>
+          <text class="status">状态：{{item.status === 'on' ? '上架' : item.status === 'off' ? '下架' : '已售'}}</text>
+        </view>
+        <view class="actions">
+          <button size="mini" bindtap="changeGoodsStatus" data-id="{{item._id}}" data-status="{{item.status === 'on' ? 'off' : 'on'}}">
+            {{item.status === 'on' ? '下架' : '上架'}}
+          </button>
+          <button size="mini" type="warn" bindtap="deleteGoods" data-id="{{item._id}}">删除</button>
+        </view>
+      </view>
+    </view>
+    <view class="loading-more" wx:if="{{loading}}">加载中...</view>
+    <view class="no-more" wx:if="{{!hasMore && goodsList.length > 0}}">没有更多了</view>
+  </view>
+
+  <!-- 用户管理面板（类似结构） -->
+  <view class="panel" wx:if="{{currentTab === 2}}">
+    <view class="user-list">
+      <view wx:for="{{userList}}" wx:key="_id" class="user-item">
+        <image src="{{item.avatar || '/images/default-avatar.png'}}" mode="aspectFill" />
+        <view class="info">
+          <text class="nickname">{{item.nickname || '微信用户'}}</text>
+          <text class="student">学号：{{item.student_id || '未绑定'}}</text>
+        </view>
+        <view class="actions">
+          <button size="mini" bindtap="toggleUserDisable" data-id="{{item._id}}" data-disabled="{{item.disabled}}">
+            {{item.disabled ? '启用' : '禁用'}}
+          </button>
+        </view>
+      </view>
+    </view>
+    <view class="loading-more" wx:if="{{loadingUsers}}">加载中...</view>
+    <view class="no-more" wx:if="{{!hasMoreUsers && userList.length > 0}}">没有更多了</view>
+  </view>
+
+  <!-- 留言管理面板 -->
+  <view class="panel" wx:if="{{currentTab === 3}}">
+    <view class="message-list">
+      <view wx:for="{{messageList}}" wx:key="_id" class="message-item">
+        <view class="header">
+          <text class="user">{{item.userNickname}}</text>
+          <text class="goods">商品：{{item.goodsTitle}}</text>
+        </view>
+        <view class="content">{{item.content}}</view>
+        <view wx:if="{{item.reply}}" class="reply">回复：{{item.reply}}</view>
+        <view class="actions">
+          <button size="mini" type="warn" bindtap="deleteMessage" data-id="{{item._id}}">删除</button>
+        </view>
+      </view>
+    </view>
+    <view class="loading-more" wx:if="{{loadingMessages}}">加载中...</view>
+    <view class="no-more" wx:if="{{!hasMoreMessages && messageList.length > 0}}">没有更多了</view>
+  </view>
+</view>

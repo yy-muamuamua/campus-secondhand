@@ -1,0 +1,13 @@
+{
+  "name": "sendVerificationCode",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {},
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "nodemailer": "^6.9.0",
+    "wx-server-sdk": "latest"
+  }
+}
