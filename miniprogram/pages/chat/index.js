@@ -108,9 +108,10 @@ Page({
   },
 
   startPolling() {
+    const that = this
     this.setData({
       pollingTimer: setInterval(() => {
-        this.loadMessages()
+        that.loadMessages()
       }, 3000)
     })
   },
@@ -125,13 +126,15 @@ Page({
   scrollToBottom() {
     if (this.data.messages.length > 0) {
       const lastId = this.data.messages[this.data.messages.length - 1]._id
-      this.setData({ scrollToId: `msg-${lastId}` })
+      this.setData({ scrollToId: 'msg-' + lastId })
     }
   },
 
   formatTime(time) {
     if (!time) return ''
     const date = new Date(time)
-    return `${String(date.getHours()).padStart(2, '0')}:${String(date.getMinutes()).padStart(2, '0')}`
+    const hours = String(date.getHours()).padStart(2, '0')
+    const minutes = String(date.getMinutes()).padStart(2, '0')
+    return hours + ':' + minutes
   }
 })

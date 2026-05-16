@@ -43,8 +43,12 @@ Page({
       })
 
       if (res.result.success) {
+        let orders = res.result.data.orders
+        orders.forEach((order) => {
+          order.formattedAmount = (order.totalAmount / 100).toFixed(2)
+        })
         this.setData({
-          orders: res.result.data.orders
+          orders: orders
         })
       }
     } catch (error) {
@@ -56,7 +60,7 @@ Page({
   goToDetail(e) {
     const id = e.currentTarget.dataset.id
     wx.navigateTo({
-      url: `/pages/orderDetail/index?id=${id}`
+      url: '/pages/orderDetail/index?id=' + id
     })
   },
 
@@ -64,7 +68,7 @@ Page({
     const order = e.currentTarget.dataset.order
     wx.showModal({
       title: '支付确认',
-      content: `确认支付 ¥${(order.totalAmount / 100).toFixed(2)} 吗？',
+      content: '确认支付 ¥' + (order.totalAmount / 100).toFixed(2) + ' 吗？',
       success: async (res) => {
         if (res.confirm) {
           try {
@@ -133,14 +137,14 @@ Page({
   goToReview(e) {
     const order = e.currentTarget.dataset.order
     wx.navigateTo({
-      url: `/pages/review/index?orderId=${order._id}`
+      url: '/pages/review/index?orderId=' + order._id
     })
   },
 
   buyAgain(e) {
     const order = e.currentTarget.dataset.order
     wx.navigateTo({
-      url: `/pages/detail/detail?goodsId=${order.goodsId}`
+      url: '/pages/detail/detail?goodsId=' + order.goodsId
     })
   },
 
@@ -161,6 +165,17 @@ Page({
   formatTime(time) {
     if (!time) return ''
     const date = new Date(time)
-    return `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')} ${String(date.getHours()).padStart(2, '0')}:${String(date.getMinutes()).padStart(2, '0')}`
+    const now = new Date()
+    const diff = now.getTime() - date.getTime()
+
+    if (diff < 60000) return '刚刚'
+    if (diff < 3600000) return Math.floor(diff / 60000) + '分钟前'
+    if (diff < 86400000) return Math.floor(diff / 3600000) + '小时前'
+    if (diff < 604800000) return Math.floor(diff / 86400000) + '天前'
+
+    const year = date.getFullYear()
+    const month = String(date.getMonth() + 1).padStart(2, '0')
+    const day = String(date.getDate()).padStart(2, '0')
+    return month + '-' + day
   }
 })

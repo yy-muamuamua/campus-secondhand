@@ -35,7 +35,7 @@
         <image class="goods-image" src="{{item.goodsInfo.images[0]}}" mode="aspectFill" />
         <view class="goods-info">
           <text class="goods-title">{{item.goodsInfo.title}}</text>
-          <text class="goods-price">¥{{(item.totalAmount / 100).toFixed(2)}}</text>
+          <text class="goods-price">¥{{item.formattedAmount}}</text>
           <text class="goods-quantity">数量：{{item.quantity}}</text>
         </view>
       </view>

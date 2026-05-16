@@ -58,16 +58,15 @@ Page({
       sizeType: ['compressed'],
       sourceType: ['album', 'camera'],
       success: (res) => {
-        this.setData({
-          images: [...this.data.images, ...res.tempFilePaths]
-        })
+        const newImages = this.data.images.concat(res.tempFilePaths)
+        this.setData({ images: newImages })
       }
     })
   },
 
   removeImage(e) {
     const index = e.currentTarget.dataset.index
-    const images = [...this.data.images]
+    const images = this.data.images.slice()
     images.splice(index, 1)
     this.setData({ images })
   },
@@ -112,7 +111,7 @@ Page({
   goToGoods(e) {
     const goodsId = e.currentTarget.dataset.id
     wx.navigateTo({
-      url: `/pages/detail/detail?goodsId=${goodsId}`
+      url: '/pages/detail/detail?goodsId=' + goodsId
     })
   },
 

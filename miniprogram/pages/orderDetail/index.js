@@ -2,7 +2,8 @@
 Page({
   data: {
     order: null,
-    seller: null
+    seller: null,
+    formattedTotalAmount: '0.00'
   },
 
   onLoad(options) {
@@ -19,7 +20,12 @@ Page({
       })
 
       if (res.result.success) {
-        this.setData({ order: res.result.data }, () => {
+        const order = res.result.data
+        const formattedTotalAmount = (order.totalAmount / 100).toFixed(2)
+        this.setData({ 
+          order: order,
+          formattedTotalAmount: formattedTotalAmount
+        }, () => {
           this.loadSeller(res.result.data.sellerOpenid)
         })
       }
@@ -31,7 +37,6 @@ Page({
 
   async loadSeller(openid) {
     try {
-      // 使用现有云函数或获取用户信息
       const userRes = await wx.cloud.callFunction({
         name: 'getUserInfo',
         data: { openid }
@@ -48,14 +53,14 @@ Page({
   goToGoods(e) {
     const goodsId = e.currentTarget.dataset.id
     wx.navigateTo({
-      url: `/pages/detail/detail?goodsId=${goodsId}`
+      url: '/pages/detail/detail?goodsId=' + goodsId
     })
   },
 
   goToChat(e) {
     const openid = e.currentTarget.dataset.openid
     wx.navigateTo({
-      url: `/pages/chat/index?targetOpenid=${openid}`
+      url: '/pages/chat/index?targetOpenid=' + openid
     })
   },
 
@@ -124,14 +129,14 @@ Page({
   goToReview(e) {
     const order = this.data.order
     wx.navigateTo({
-      url: `/pages/review/index?orderId=${order._id}`
+      url: '/pages/review/index?orderId=' + order._id
     })
   },
 
   buyAgain(e) {
     const order = this.data.order
     wx.navigateTo({
-      url: `/pages/detail/detail?goodsId=${order.goodsId}`
+      url: '/pages/detail/detail?goodsId=' + order.goodsId
     })
   },
 
@@ -211,6 +216,15 @@ Page({
   formatTime(time) {
     if (!time) return ''
     const date = new Date(time)
-    return `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')} ${String(date.getHours()).padStart(2, '0')}:${String(date.getMinutes()).padStart(2, '0')}`
+    const year = date.getFullYear()
+    const month = String(date.getMonth() + 1).padStart(2, '0')
+    const day = String(date.getDate()).padStart(2, '0')
+    const hours = String(date.getHours()).padStart(2, '0')
+    const minutes = String(date.getMinutes()).padStart(2, '0')
+    return year + '-' + month + '-' + day + ' ' + hours + ':' + minutes
+  },
+
+  formatPrice(price) {
+    return (price / 100).toFixed(2)
   }
 })
