@@ -1,66 +1,55 @@
 // pages/my/index.js
 Page({
-
-  /**
-   * 页面的初始数据
-   */
   data: {
-
+    userInfo: null,
+    loading: true
   },
 
-  /**
-   * 生命周期函数--监听页面加载
-   */
-  onLoad(options) {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady() {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
   onShow() {
-
+    this.loadUserInfo()
   },
 
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide() {
-
+  async loadUserInfo() {
+    this.setData({ loading: true })
+    try {
+      const res = await wx.cloud.callFunction({
+        name: 'getUserInfo',
+        data: {}
+      })
+      if (res.result.code === 0) {
+        this.setData({ userInfo: res.result.data, loading: false })
+      } else {
+        wx.showToast({ title: res.result.message, icon: 'none' })
+        this.setData({ loading: false })
+      }
+    } catch (err) {
+      console.error(err)
+      wx.showToast({ title: '网络错误', icon: 'none' })
+      this.setData({ loading: false })
+    }
   },
 
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload() {
-
+  goToMyGoods() {
+    wx.navigateTo({ url: '/pages/myGoods/myGoods' })
   },
 
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh() {
-
+  goToSettings() {
+    wx.navigateTo({ url: '/pages/settings/settings' })
   },
 
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom() {
-
+  goToFavorites() {
+    wx.navigateTo({ url: '/pages/favorites/favorites' })
   },
 
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage() {
+  goToMyMessages() {
+    wx.navigateTo({ url: '/pages/myMessages/myMessages' })
+  },
 
+  goToAdmin() {
+    wx.navigateTo({ url: '/pages/admin/admin' })
+  },
+
+  goToProfile() {
+    wx.navigateTo({ url: '/pages/profile/profile' })
   }
 })

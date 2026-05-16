@@ -1,2 +1,36 @@
-<!--pages/category/index.wxml-->
-<text>pages/category/index.wxml</text>
+<view class="page">
+  <scroll-view scroll-x class="category-scroll">
+    <view class="category-list">
+      <view
+        wx:for="{{categories}}"
+        wx:key="index"
+        class="category-item {{currentCategory === item ? 'active' : ''}}"
+        data-category="{{item}}"
+        bindtap="switchCategory"
+      >{{item}}</view>
+    </view>
+  </scroll-view>
+
+  <view class="goods-list">
+    <view
+      wx:for="{{goodsList}}"
+      wx:key="_id"
+      class="goods-item"
+      data-id="{{item._id}}"
+      bindtap="goToDetail"
+    >
+      <image src="{{item.images && item.images[0] ? item.images[0] : '/images/default.png'}}" mode="aspectFill" />
+      <view class="info">
+        <text class="title">{{item.title}}</text>
+        <text class="price">¥{{item.price}}</text>
+        <text class="status-tag" wx:if="{{item.status !== 'on'}}">
+          {{item.status === 'sold' ? '已售' : '已下架'}}
+        </text>
+      </view>
+    </view>
+  </view>
+
+  <view class="loading" wx:if="{{loading}}">加载中...</view>
+  <view class="no-more" wx:if="{{!hasMore && goodsList.length > 0}}">没有更多了</view>
+  <view class="empty" wx:if="{{!loading && goodsList.length === 0}}">暂无商品</view>
+</view>

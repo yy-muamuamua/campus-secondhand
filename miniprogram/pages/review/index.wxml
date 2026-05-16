@@ -7,7 +7,7 @@
         <image class="goods-image" src="{{order.goodsInfo.images[0]}}" mode="aspectFill" />
         <view class="goods-info">
           <text class="goods-title">{{order.goodsInfo.title}}</text>
-          <text class="goods-price">¥{{(order.totalAmount / 100).toFixed(2)}}</text>
+          <text class="goods-price">¥{{formattedPrice}}</text>
         </view>
       </view>
     </view>

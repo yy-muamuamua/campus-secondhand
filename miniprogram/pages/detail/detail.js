@@ -193,15 +193,14 @@ Page({
         data: { goodsId: this.data.goodsId }
       })
       if (res.result.code === 0) {
-        // const userRes = await wx.cloud.callFunction({ name: 'getUserInfo' })
-        // const currentUserId = userRes.result.data?._id 
         const idRes = await wx.cloud.callFunction({ name: 'getCurrentUserId' })
         const currentUserId = idRes.result.data
-        const isSeller = (currentUserId === goodsRes.data.seller_id)
+        const isSeller = (currentUserId === res.result.data.seller_id)
         this.setData({
           goodsInfo: res.result.data,
           sellerInfo: res.result.data.seller,
-          loading: false
+          loading: false,
+          isSeller
         })
       } else {
         wx.showToast({ title: res.result.message, icon: 'none' })

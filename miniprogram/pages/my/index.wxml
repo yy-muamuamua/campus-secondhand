@@ -1,2 +1,40 @@
-<!--pages/my/index.wxml-->
-<text>pages/my/index.wxml</text>
+<view class="page">
+  <view class="header" wx:if="{{!loading && userInfo}}" bindtap="goToProfile">
+    <view class="avatar">
+      <image src="{{userInfo.avatar || '/images/default-avatar.png'}}" mode="aspectFill" />
+    </view>
+    <view class="info">
+      <text class="nickname">{{userInfo.nickname || '微信用户'}}</text>
+      <view class="student">
+        <text wx:if="{{userInfo.email_verified}}">学号：{{userInfo.student_id}}</text>
+        <text wx:else class="unverified">未绑定学号</text>
+      </view>
+    </view>
+    <text class="arrow">›</text>
+  </view>
+
+  <view class="loading" wx:if="{{loading}}">加载中...</view>
+
+  <view class="menu" wx:if="{{!loading && userInfo}}">
+    <view class="menu-item" bindtap="goToMyGoods">
+      <text>我的发布</text>
+      <text class="arrow">›</text>
+    </view>
+    <view class="menu-item" bindtap="goToFavorites">
+      <text>我的收藏</text>
+      <text class="arrow">›</text>
+    </view>
+    <view class="menu-item" bindtap="goToMyMessages">
+      <text>我的咨询</text>
+      <text class="arrow">›</text>
+    </view>
+    <view class="menu-item" bindtap="goToSettings">
+      <text>设置</text>
+      <text class="arrow">›</text>
+    </view>
+    <view class="menu-item" wx:if="{{userInfo.isAdmin}}" bindtap="goToAdmin">
+      <text>管理后台</text>
+      <text class="arrow">›</text>
+    </view>
+  </view>
+</view>

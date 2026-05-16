@@ -6,7 +6,8 @@ Page({
     productRating: 0,
     sellerRating: 0,
     content: '',
-    images: []
+    images: [],
+    formattedPrice: '0.00'
   },
 
   onLoad(options) {
@@ -25,7 +26,12 @@ Page({
       })
 
       if (res.result.success) {
-        this.setData({ order: res.result.data })
+        const order = res.result.data
+        const formattedPrice = (order.totalAmount / 100).toFixed(2)
+        this.setData({ 
+          order: order,
+          formattedPrice: formattedPrice
+        })
       }
     } catch (error) {
       console.error('加载订单失败', error)
