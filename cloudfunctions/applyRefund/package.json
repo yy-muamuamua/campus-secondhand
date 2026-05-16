@@ -3,5 +3,7 @@
   "version": "1.0.0",
   "description": "申请退款云函数",
   "main": "index.js",
-  "dependencies": {}
+  "dependencies": {
+    "wx-server-sdk": "~3.0.4"
+  }
 }

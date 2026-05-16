@@ -3,5 +3,7 @@
   "version": "1.0.0",
   "description": "获取聊天列表云函数",
   "main": "index.js",
-  "dependencies": {}
+  "dependencies": {
+    "wx-server-sdk": "~3.0.4"
+  }
 }

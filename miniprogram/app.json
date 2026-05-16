@@ -20,6 +20,9 @@
     "pages/chatList/index",
     "pages/chat/index"
   ],
+  "useExtendedLib": {
+    "weui": true
+  },
   "window": {
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#ffffff",

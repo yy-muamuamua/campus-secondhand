@@ -1,2 +1,37 @@
-<!--pages/login/login.wxml-->
-<text>pages/login/login.wxml</text>
+<view class="page">
+  <view class="login-container">
+    <view class="header">
+      <text class="title">校园二手交易平台</text>
+      <text class="subtitle">登录您的账号</text>
+    </view>
+
+    <view class="weui-cells weui-cells_form">
+      <view class="weui-cell">
+        <view class="weui-cell__hd">
+          <view class="weui-label">邮箱</view>
+        </view>
+        <view class="weui-cell__bd">
+          <input class="weui-input" placeholder="请输入邮箱" bindinput="bindEmailInput" value="{{email}}" type="text" />
+        </view>
+      </view>
+      <view class="weui-cell">
+        <view class="weui-cell__hd">
+          <view class="weui-label">密码</view>
+        </view>
+        <view class="weui-cell__bd">
+          <input class="weui-input" placeholder="请输入密码" bindinput="bindPasswordInput" value="{{password}}" password />
+        </view>
+      </view>
+    </view>
+
+    <view class="btn-area">
+      <button class="weui-btn weui-btn_primary" bindtap="submitLogin" disabled="{{isLoading}}">
+        {{isLoading ? '登录中...' : '登录'}}
+      </button>
+      <button class="weui-btn weui-btn_default" bindtap="goToRegister">没有账号？去注册</button>
+    </view>
+  </view>
+
+  <mp-toast id="toast" />
+  <mp-dialog show="{{showDialog}}" title="{{dialogTitle}}" content="{{dialogContent}}" bindbuttontap="onDialogTap" buttons="{{dialogButtons}}" />
+</view>

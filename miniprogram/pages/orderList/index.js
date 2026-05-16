@@ -1,4 +1,3 @@
-// pages/orderList/index.js
 Page({
   data: {
     activeTab: 'all',
@@ -9,7 +8,11 @@ Page({
     ],
     orders: [],
     page: 0,
-    size: 10
+    size: 10,
+    showDialog: false,
+    dialogTitle: '',
+    dialogContent: '',
+    dialogButtons: [{ text: '确定' }]
   },
 
   onLoad() {
@@ -18,6 +21,30 @@ Page({
 
   onShow() {
     this.loadOrders()
+  },
+
+  showToast(message, icon = 'none') {
+    const toast = this.selectComponent('#toast')
+    if (toast) {
+      toast.show({
+        msg: message,
+        icon: icon === 'success' ? 'success' : 'warn',
+        duration: icon === 'success' ? 1500 : 2000
+      })
+    }
+  },
+
+  showErrorDialog(title, content) {
+    this.setData({
+      showDialog: true,
+      dialogTitle: title,
+      dialogContent: content,
+      dialogButtons: [{ text: '我知道了' }]
+    })
+  },
+
+  onDialogTap() {
+    this.setData({ showDialog: false })
   },
 
   switchTab(e) {
@@ -53,7 +80,7 @@ Page({
       }
     } catch (error) {
       console.error('加载订单失败', error)
-      wx.showToast({ title: '加载失败', icon: 'none' })
+      this.showToast('加载失败', 'warn')
     }
   },
 
@@ -66,72 +93,108 @@ Page({
 
   async payOrder(e) {
     const order = e.currentTarget.dataset.order
-    wx.showModal({
-      title: '支付确认',
-      content: '确认支付 ¥' + (order.totalAmount / 100).toFixed(2) + ' 吗？',
-      success: async (res) => {
-        if (res.confirm) {
-          try {
-            await wx.cloud.callFunction({
-              name: 'createPayment',
-              data: { orderId: order._id }
-            })
-            wx.showToast({ title: '支付成功', icon: 'success' })
-            this.loadOrders()
-          } catch (error) {
-            wx.showToast({ title: '支付失败', icon: 'none' })
-          }
-        }
-      }
+    this.setData({
+      showDialog: true,
+      dialogTitle: '支付确认',
+      dialogContent: '确认支付 ¥' + (order.totalAmount / 100).toFixed(2) + ' 吗？',
+      dialogButtons: [
+        { text: '取消' },
+        { text: '确认支付', type: 'primary' }
+      ],
+      currentOrder: order,
+      dialogAction: 'pay'
     })
   },
 
   async cancelOrder(e) {
     const order = e.currentTarget.dataset.order
-    wx.showModal({
-      title: '取消订单',
-      content: '确定要取消这个订单吗？',
-      success: async (res) => {
-        if (res.confirm) {
-          try {
-            await wx.cloud.callFunction({
-              name: 'cancelOrder',
-              data: { orderId: order._id, reason: '买家主动取消' }
-            })
-            wx.showToast({ title: '取消成功', icon: 'success' })
-            this.loadOrders()
-          } catch (error) {
-            wx.showToast({ title: '取消失败', icon: 'none' })
-          }
-        }
-      }
+    this.setData({
+      showDialog: true,
+      dialogTitle: '取消订单',
+      dialogContent: '确定要取消这个订单吗？',
+      dialogButtons: [
+        { text: '否' },
+        { text: '是', type: 'primary' }
+      ],
+      currentOrder: order,
+      dialogAction: 'cancel'
     })
-  },
-
-  remindSeller(e) {
-    wx.showToast({ title: '已提醒卖家', icon: 'success' })
   },
 
   async confirmReceipt(e) {
     const order = e.currentTarget.dataset.order
-    wx.showModal({
-      title: '确认收货',
-      content: '请确认您已经收到商品',
-      success: async (res) => {
-        if (res.confirm) {
-          try {
-            await wx.cloud.callFunction({
-              name: 'confirmReceipt',
-              data: { orderId: order._id }
-            })
-            wx.showToast({ title: '收货成功', icon: 'success' })
-            this.loadOrders()
-          } catch (error) {
-            wx.showToast({ title: '操作失败', icon: 'none' })
-          }
-        }
-      }
+    this.setData({
+      showDialog: true,
+      dialogTitle: '确认收货',
+      dialogContent: '请确认您已经收到商品',
+      dialogButtons: [
+        { text: '否' },
+        { text: '是', type: 'primary' }
+      ],
+      currentOrder: order,
+      dialogAction: 'confirm'
     })
+  },
+
+  onDialogButtonTap(e) {
+    const index = e.detail.index
+    const action = this.data.dialogAction
+    const order = this.data.currentOrder
+
+    this.setData({ showDialog: false })
+
+    if (index === 0) return
+
+    if (action === 'pay') {
+      this.doPayOrder(order)
+    } else if (action === 'cancel') {
+      this.doCancelOrder(order)
+    } else if (action === 'confirm') {
+      this.doConfirmReceipt(order)
+    }
+  },
+
+  async doPayOrder(order) {
+    try {
+      await wx.cloud.callFunction({
+        name: 'createPayment',
+        data: { orderId: order._id }
+      })
+      this.showToast('支付成功', 'success')
+      this.loadOrders()
+    } catch (error) {
+      this.showToast('支付失败', 'warn')
+    }
+  },
+
+  async doCancelOrder(order) {
+    try {
+      await wx.cloud.callFunction({
+        name: 'cancelOrder',
+        data: { orderId: order._id, reason: '买家主动取消' }
+      })
+      this.showToast('取消成功', 'success')
+      this.loadOrders()
+    } catch (error) {
+      this.showToast('取消失败', 'warn')
+    }
+  },
+
+  async doConfirmReceipt(order) {
+    try {
+      await wx.cloud.callFunction({
+        name: 'confirmReceipt',
+        data: { orderId: order._id }
+      })
+      this.showToast('收货成功', 'success')
+      this.loadOrders()
+    } catch (error) {
+      this.showToast('操作失败', 'warn')
+    }
+  },
+
+  remindSeller(e) {
+    this.showToast('已提醒卖家', 'success')
   },
 
   goToReview(e) {

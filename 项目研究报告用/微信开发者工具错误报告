@@ -1,0 +1,112 @@
+Error: timeout
+    at Function.<anonymous> (WAServiceMainContext.js?t=wechat&v=3.16.0:1)
+    at p (WAServiceMainContext.js?t=wechat&v=3.16.0:1)
+    at WAServiceMainContext.js?t=wechat&v=3.16.0:1
+    at WAServiceMainContext.js?t=wechat&v=3.16.0:1(env: macOS,mp,2.01.2510280; lib: 3.16.0)
+index.js? [sm]:55 加载订单失败 Error: cloud.callFunction:fail Error: errCode: -504002 functions execute fail | errMsg: Error: Cannot find module 'wx-server-sdk'
+Require stack:
+- /var/user/index.js
+- /data/scf/frame/node16/userFunction.js
+- /data/scf/frame/node16/runtime.js 更多错误信息请访问：https://docs.cloudbase.net/error-code/basic/FUNCTIONS_EXECUTE_FAIL (callId: 1778943828132-0.4826705227908257) (trace: 23:3:48 start->23:3:50 normal poll->23:3:53 system error (Error: errCode: -504002 functions execute fail | errMsg: Error: Cannot find module 'wx-server-sdk'
+Require stack:
+- /var/user/index.js
+- /data/scf/frame/node16/userFunction.js
+- /data/scf/frame/node16/runtime.js 更多错误信息请访问：https://docs.cloudbase.net/error-code/basic/FUNCTIONS_EXECUTE_FAIL), abort)
+    at N (<anonymous>:1:255194)
+    at <anonymous>:1:293368(env: macOS,mp,2.01.2510280; lib: 3.16.0)
+_callee$ @ index.js? [sm]:55
+s @ regeneratorRuntime.js?forceSync=true:1
+(anonymous) @ regeneratorRuntime.js?forceSync=true:1
+(anonymous) @ regeneratorRuntime.js?forceSync=true:1
+asyncGeneratorStep @ asyncToGenerator.js?forceSync=true:1
+i @ asyncToGenerator.js?forceSync=true:1
+Promise.then (async)
+asyncGeneratorStep @ asyncToGenerator.js?forceSync=true:1
+c @ asyncToGenerator.js?forceSync=true:1
+(anonymous) @ asyncToGenerator.js?forceSync=true:1
+(anonymous) @ asyncToGenerator.js?forceSync=true:1
+loadOrders @ index.js? [sm]:56
+onLoad @ index.js? [sm]:16
+index.js? [sm]:55 加载订单失败 Error: cloud.callFunction:fail Error: errCode: -504002 functions execute fail | errMsg: Error: Cannot find module 'wx-server-sdk'
+Require stack:
+- /var/user/index.js
+- /data/scf/frame/node16/userFunction.js
+- /data/scf/frame/node16/runtime.js 更多错误信息请访问：https://docs.cloudbase.net/error-code/basic/FUNCTIONS_EXECUTE_FAIL (callId: 1778943828132-0.955094630197229) (trace: 23:3:48 start->23:3:50 normal poll->23:3:53 system error (Error: errCode: -504002 functions execute fail | errMsg: Error: Cannot find module 'wx-server-sdk'
+Require stack:
+- /var/user/index.js
+- /data/scf/frame/node16/userFunction.js
+- /data/scf/frame/node16/runtime.js 更多错误信息请访问：https://docs.cloudbase.net/error-code/basic/FUNCTIONS_EXECUTE_FAIL), abort)
+    at N (<anonymous>:1:255194)
+    at <anonymous>:1:293368(env: macOS,mp,2.01.2510280; lib: 3.16.0)
+_callee$ @ index.js? [sm]:55
+s @ regeneratorRuntime.js?forceSync=true:1
+(anonymous) @ regeneratorRuntime.js?forceSync=true:1
+(anonymous) @ regeneratorRuntime.js?forceSync=true:1
+asyncGeneratorStep @ asyncToGenerator.js?forceSync=true:1
+i @ asyncToGenerator.js?forceSync=true:1
+Promise.then (async)
+asyncGeneratorStep @ asyncToGenerator.js?forceSync=true:1
+c @ asyncToGenerator.js?forceSync=true:1
+(anonymous) @ asyncToGenerator.js?forceSync=true:1
+(anonymous) @ asyncToGenerator.js?forceSync=true:1
+loadOrders @ index.js? [sm]:56
+onShow @ index.js? [sm]:20
+index.js? [sm]:55 加载订单失败 Error: cloud.callFunction:fail Error: errCode: -504002 functions execute fail | errMsg: Error: Cannot find module 'wx-server-sdk'
+Require stack:
+- /var/user/index.js
+- /data/scf/frame/node16/userFunction.js
+- /data/scf/frame/node16/runtime.js 更多错误信息请访问：https://docs.cloudbase.net/error-code/basic/FUNCTIONS_EXECUTE_FAIL (callId: 1778943831573-0.16327292439467112) (trace: 23:3:51 start->23:3:53 normal poll->23:3:56 system error (Error: errCode: -504002 functions execute fail | errMsg: Error: Cannot find module 'wx-server-sdk'
+Require stack:
+- /var/user/index.js
+- /data/scf/frame/node16/userFunction.js
+- /data/scf/frame/node16/runtime.js 更多错误信息请访问：https://docs.cloudbase.net/error-code/basic/FUNCTIONS_EXECUTE_FAIL), abort)
+    at N (<anonymous>:1:255194)
+    at <anonymous>:1:293368(env: macOS,mp,2.01.2510280; lib: 3.16.0)
+_callee$ @ index.js? [sm]:55
+s @ regeneratorRuntime.js?forceSync=true:1
+(anonymous) @ regeneratorRuntime.js?forceSync=true:1
+(anonymous) @ regeneratorRuntime.js?forceSync=true:1
+asyncGeneratorStep @ asyncToGenerator.js?forceSync=true:1
+i @ asyncToGenerator.js?forceSync=true:1
+Promise.then (async)
+asyncGeneratorStep @ asyncToGenerator.js?forceSync=true:1
+c @ asyncToGenerator.js?forceSync=true:1
+(anonymous) @ asyncToGenerator.js?forceSync=true:1
+(anonymous) @ asyncToGenerator.js?forceSync=true:1
+loadOrders @ index.js? [sm]:56
+onShow @ index.js? [sm]:20
+index.js? [sm]:55 加载订单失败 Error: cloud.callFunction:fail Error: errCode: -504002 functions execute fail | errMsg: Error: Cannot find module 'wx-server-sdk'
+Require stack:
+- /var/user/index.js
+- /data/scf/frame/node16/userFunction.js
+- /data/scf/frame/node16/runtime.js 更多错误信息请访问：https://docs.cloudbase.net/error-code/basic/FUNCTIONS_EXECUTE_FAIL (callId: 1778943834343-0.2418636580953999) (trace: 23:3:54 start->23:3:56 normal poll->23:3:59 system error (Error: errCode: -504002 functions execute fail | errMsg: Error: Cannot find module 'wx-server-sdk'
+Require stack:
+- /var/user/index.js
+- /data/scf/frame/node16/userFunction.js
+- /data/scf/frame/node16/runtime.js 更多错误信息请访问：https://docs.cloudbase.net/error-code/basic/FUNCTIONS_EXECUTE_FAIL), abort)
+    at N (<anonymous>:1:255194)
+    at <anonymous>:1:293368(env: macOS,mp,2.01.2510280; lib: 3.16.0)
+_callee$ @ index.js? [sm]:55
+s @ regeneratorRuntime.js?forceSync=true:1
+(anonymous) @ regeneratorRuntime.js?forceSync=true:1
+(anonymous) @ regeneratorRuntime.js?forceSync=true:1
+asyncGeneratorStep @ asyncToGenerator.js?forceSync=true:1
+i @ asyncToGenerator.js?forceSync=true:1
+Promise.then (async)
+asyncGeneratorStep @ asyncToGenerator.js?forceSync=true:1
+c @ asyncToGenerator.js?forceSync=true:1
+(anonymous) @ asyncToGenerator.js?forceSync=true:1
+(anonymous) @ asyncToGenerator.js?forceSync=true:1
+loadOrders @ index.js? [sm]:56
+onShow @ index.js? [sm]:20
+index.js? [sm]:55 加载订单失败 Error: cloud.callFunction:fail Error: errCode: -504002 functions execute fail | errMsg: Error: Cannot find module 'wx-server-sdk'
+Require stack:
+- /var/user/index.js
+- /data/scf/frame/node16/userFunction.js
+- /data/scf/frame/node16/runtime.js 更多错误信息请访问：https://docs.cloudbase.net/error-code/basic/FUNCTIONS_EXECUTE_FAIL (callId: 1778943867095-0.21428323253559944) (trace: 23:4:27 start->23:4:29 normal poll->23:4:32 system error (Error: errCode: -504002 functions execute fail | errMsg: Error: Cannot find module 'wx-server-sdk'
+Require stack:
+- /var/user/index.js
+- /data/scf/frame/node16/userFunction.js
+- /data/scf/frame/node16/runtime.js 更多错误信息请访问：https://docs.cloudbase.net/error-code/basic/FUNCTIONS_EXECUTE_FAIL), abort)
+    at N (<anonymous>:1:255194)
+    at <anonymous>:1:293368(env: macOS,mp,2.01.2510280; lib: 3.16.0)

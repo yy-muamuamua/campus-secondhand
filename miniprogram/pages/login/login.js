@@ -2,38 +2,57 @@ Page({
   data: {
     email: '',
     password: '',
-    isLoading: false
+    isLoading: false,
+    showDialog: false,
+    dialogTitle: '',
+    dialogContent: '',
+    dialogButtons: [{ text: '确定' }]
   },
 
-  // 输入邮箱
   bindEmailInput(e) {
     this.setData({
       email: e.detail.value
     })
   },
 
-  // 输入密码
   bindPasswordInput(e) {
     this.setData({
       password: e.detail.value
     })
   },
 
-  // 提交登录
+  showToast(message, icon = 'none') {
+    const toast = this.selectComponent('#toast')
+    toast.show({
+      msg: message,
+      icon: icon === 'success' ? 'success' : 'warn',
+      duration: icon === 'success' ? 1500 : 2000
+    })
+  },
+
+  showErrorDialog(title, content) {
+    this.setData({
+      showDialog: true,
+      dialogTitle: title,
+      dialogContent: content,
+      dialogButtons: [{ text: '我知道了' }]
+    })
+  },
+
+  onDialogTap() {
+    this.setData({ showDialog: false })
+  },
+
   submitLogin() {
     const { email, password } = this.data
 
     if (!email || !password) {
-      wx.showToast({
-        title: '请填写邮箱和密码',
-        icon: 'none'
-      })
+      this.showErrorDialog('提示', '请填写邮箱和密码')
       return
     }
 
     this.setData({ isLoading: true })
 
-    // 调用云函数登录
     wx.cloud.callFunction({
       name: 'login',
       data: {
@@ -44,41 +63,29 @@ Page({
     }).then(res => {
       this.setData({ isLoading: false })
       if (res.result.success) {
-        wx.showToast({
-          title: '登录成功',
-          icon: 'success'
-        })
-        
-        // 保存用户信息到本地存储
+        this.showToast('登录成功', 'success')
+
         wx.setStorageSync('userInfo', {
           email: email,
           role: res.result.role || 'guest',
           _id: res.result.userId
         })
-        
-        // 跳转到个人中心
+
         setTimeout(() => {
           wx.navigateTo({
             url: '/pages/profile/profile'
           })
         }, 1500)
       } else {
-        wx.showToast({
-          title: '登录失败，请检查邮箱和密码',
-          icon: 'none'
-        })
+        this.showErrorDialog('登录失败', '请检查邮箱和密码')
       }
     }).catch(err => {
       this.setData({ isLoading: false })
-      wx.showToast({
-        title: '登录失败，请重试',
-        icon: 'none'
-      })
+      this.showErrorDialog('错误', '登录失败，请检查网络后重试')
       console.error('登录失败:', err)
     })
   },
 
-  // 跳转到注册页面
   goToRegister() {
     wx.navigateTo({
       url: '/pages/register/register'

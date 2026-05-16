@@ -1,86 +1,97 @@
-<!--pages/orderList/index.wxml-->
-<view class="container">
-  <view class="tabs">
-    <view
-      wx:for="{{tabs}}"
-      wx:key="key"
-      class="tab-item {{activeTab === item.key ? 'active' : ''}}"
-      data-key="{{item.key}}"
-      bindtap="switchTab"
-    >
-      {{item.name}}
-      <view wx:if="{{item.count > 0}}" class="badge">{{item.count > 99 ? '99+' : item.count}}</view>
-    </view>
-  </view>
-
-  <view wx:if="{{orders.length === 0}}" class="empty-state">
-    <view class="empty-icon">📦</view>
-    <text class="empty-text">暂无订单</text>
-  </view>
-
-  <view wx:else class="order-list">
-    <view
-      wx:for="{{orders}}"
-      wx:key="_id"
-      class="order-item"
-      data-id="{{item._id}}"
-      bindtap="goToDetail"
-    >
-      <view class="order-header">
-        <text class="order-no">订单号：{{item.orderNo}}</text>
-        <text class="order-status {{item.status}}">{{getStatusText(item.status)}}</text>
-      </view>
-
-      <view class="order-content">
-        <image class="goods-image" src="{{item.goodsInfo.images[0]}}" mode="aspectFill" />
-        <view class="goods-info">
-          <text class="goods-title">{{item.goodsInfo.title}}</text>
-          <text class="goods-price">¥{{item.formattedAmount}}</text>
-          <text class="goods-quantity">数量：{{item.quantity}}</text>
-        </view>
-      </view>
-
-      <view class="order-footer">
-        <text class="order-time">{{formatTime(item.createTime)}}</text>
-        <view class="order-actions">
-          <button
-            wx:if="{{item.status === 'pending_payment'}}"
-            class="action-btn primary"
-            data-order="{{item}}"
-            catchtap="payOrder"
-          >立即付款</button>
-          <button
-            wx:if="{{item.status === 'pending_payment'}}"
-            class="action-btn"
-            data-order="{{item}}"
-            catchtap="cancelOrder"
-          >取消订单</button>
-          <button
-            wx:if="{{item.status === 'paid'}}"
-            class="action-btn"
-            data-order="{{item}}"
-            catchtap="remindSeller"
-          >提醒发货</button>
-          <button
-            wx:if="{{item.status === 'shipped'}}"
-            class="action-btn primary"
-            data-order="{{item}}"
-            catchtap="confirmReceipt"
-          >确认收货</button>
-          <button
-            wx:if="{{item.status === 'received'}}"
-            class="action-btn"
-            data-order="{{item}}"
-            catchtap="goToReview"
-          >去评价</button>
-          <button
-            wx:if="{{item.status === 'completed'}}"
-            class="action-btn"
-            data-order="{{item}}"
-            catchtap="buyAgain"
-          >再次购买</button>
+<view class="page">
+  <view class="weui-tabs">
+    <view class="weui-tabs-bar">
+      <view
+        wx:for="{{tabs}}"
+        wx:key="key"
+        class="weui-tabs-bar__item {{activeTab === item.key ? 'weui-bar__item_on' : ''}}"
+        bindtap="switchTab"
+        data-key="{{item.key}}"
+      >
+        <view class="weui-tabs-bar__title {{activeTab === item.key ? 'active' : ''}}">
+          {{item.name}}
+          <view class="weui-badge" wx:if="{{item.count > 0}}">{{item.count > 99 ? '99+' : item.count}}</view>
         </view>
       </view>
     </view>
   </view>
+
+  <view class="page-content">
+    <view wx:if="{{orders.length === 0}}" class="weui-loadmore">
+      <view class="weui-loadmore__tips">暂无订单</view>
+    </view>
+
+    <view wx:else class="order-list">
+      <view
+        wx:for="{{orders}}"
+        wx:key="_id"
+        class="weui-panel weui-panel_access"
+        data-id="{{item._id}}"
+        bindtap="goToDetail"
+      >
+        <view class="weui-panel__hd">订单号：{{item.orderNo}}</view>
+        <view class="weui-panel__bd">
+          <view class="weui-media-box weui-media-box_appmsg">
+            <view class="weui-media-box__hd">
+              <image class="weui-media-box__thumb" src="{{item.goodsInfo.images[0]}}" mode="aspectFill" />
+            </view>
+            <view class="weui-media-box__bd">
+              <view class="weui-media-box__title">{{item.goodsInfo.title}}</view>
+              <view class="weui-media-box__desc">数量：{{item.quantity}}</view>
+              <view class="weui-media-box__info">
+                <text class="price">¥{{item.formattedAmount}}</text>
+                <text class="status status-{{item.status}}">{{getStatusText(item.status)}}</text>
+              </view>
+            </view>
+          </view>
+        </view>
+        <view class="weui-panel__ft">
+          <view class="weui-cell weui-cell_access">
+            <view class="order-time">{{formatTime(item.createTime)}}</view>
+            <view class="order-actions">
+              <button
+                wx:if="{{item.status === 'pending_payment'}}"
+                class="weui-btn weui-btn_mini weui-btn_primary"
+                data-order="{{item}}"
+                catchtap="payOrder"
+              >立即付款</button>
+              <button
+                wx:if="{{item.status === 'pending_payment'}}"
+                class="weui-btn weui-btn_mini weui-btn_default"
+                data-order="{{item}}"
+                catchtap="cancelOrder"
+              >取消订单</button>
+              <button
+                wx:if="{{item.status === 'paid'}}"
+                class="weui-btn weui-btn_mini weui-btn_default"
+                data-order="{{item}}"
+                catchtap="remindSeller"
+              >提醒发货</button>
+              <button
+                wx:if="{{item.status === 'shipped'}}"
+                class="weui-btn weui-btn_mini weui-btn_primary"
+                data-order="{{item}}"
+                catchtap="confirmReceipt"
+              >确认收货</button>
+              <button
+                wx:if="{{item.status === 'received'}}"
+                class="weui-btn weui-btn_mini weui-btn_default"
+                data-order="{{item}}"
+                catchtap="goToReview"
+              >去评价</button>
+              <button
+                wx:if="{{item.status === 'completed'}}"
+                class="weui-btn weui-btn_mini weui-btn_default"
+                data-order="{{item}}"
+                catchtap="buyAgain"
+              >再次购买</button>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <mp-toast id="toast" />
+  <mp-dialog show="{{showDialog}}" title="{{dialogTitle}}" content="{{dialogContent}}" bindbuttontap="onDialogTap" buttons="{{dialogButtons}}" />
 </view>
