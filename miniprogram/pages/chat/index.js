@@ -1,66 +1,137 @@
 // pages/chat/index.js
 Page({
-
-  /**
-   * 页面的初始数据
-   */
   data: {
-
+    conversationId: '',
+    targetOpenid: '',
+    targetNickname: '',
+    targetAvatar: '',
+    targetUser: {},
+    myAvatar: '',
+    openid: '',
+    messages: [],
+    inputText: '',
+    scrollToId: '',
+    pollingTimer: null
   },
 
-  /**
-   * 生命周期函数--监听页面加载
-   */
   onLoad(options) {
+    this.setData({
+      conversationId: options.conversationId || '',
+      targetOpenid: options.targetOpenid || '',
+      targetNickname: decodeURIComponent(options.nickname || ''),
+      targetAvatar: decodeURIComponent(options.avatar || '')
+    }, () => {
+      this.loadMessages()
+      this.startPolling()
+    })
 
+    if (options.targetNickname) {
+      wx.setNavigationBarTitle({ title: decodeURIComponent(options.targetNickname) })
+    }
   },
 
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady() {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
   onShow() {
-
+    this.markAsRead()
   },
 
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
   onHide() {
-
+    this.stopPolling()
   },
 
-  /**
-   * 生命周期函数--监听页面卸载
-   */
   onUnload() {
-
+    this.stopPolling()
   },
 
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh() {
+  async loadMessages() {
+    if (!this.data.conversationId) return
 
+    try {
+      const res = await wx.cloud.callFunction({
+        name: 'getChatHistory',
+        data: { conversationId: this.data.conversationId }
+      })
+
+      if (res.result.success) {
+        this.setData({
+          messages: res.result.data.messages,
+          targetUser: res.result.data.targetUser
+        }, () => {
+          if (res.result.data.targetUser.nickname) {
+            wx.setNavigationBarTitle({ title: res.result.data.targetUser.nickname })
+          }
+          this.scrollToBottom()
+        })
+      }
+    } catch (error) {
+      console.error('加载消息失败', error)
+    }
   },
 
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom() {
-
+  onInputChange(e) {
+    this.setData({ inputText: e.detail.value })
   },
 
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage() {
+  async sendMessage() {
+    const content = this.data.inputText.trim()
+    if (!content) return
 
+    this.setData({ inputText: '' })
+
+    try {
+      await wx.cloud.callFunction({
+        name: 'sendMessage',
+        data: {
+          conversationId: this.data.conversationId,
+          targetOpenid: this.data.targetUser.openid || this.data.targetOpenid,
+          content: content
+        }
+      })
+      await this.loadMessages()
+    } catch (error) {
+      console.error('发送消息失败', error)
+      wx.showToast({ title: '发送失败', icon: 'none' })
+      this.setData({ inputText: content })
+    }
+  },
+
+  async markAsRead() {
+    if (!this.data.conversationId) return
+
+    try {
+      await wx.cloud.callFunction({
+        name: 'markAsRead',
+        data: { conversationId: this.data.conversationId }
+      })
+    } catch (error) {
+      console.error('标记已读失败', error)
+    }
+  },
+
+  startPolling() {
+    this.setData({
+      pollingTimer: setInterval(() => {
+        this.loadMessages()
+      }, 3000)
+    })
+  },
+
+  stopPolling() {
+    if (this.data.pollingTimer) {
+      clearInterval(this.data.pollingTimer)
+      this.setData({ pollingTimer: null })
+    }
+  },
+
+  scrollToBottom() {
+    if (this.data.messages.length > 0) {
+      const lastId = this.data.messages[this.data.messages.length - 1]._id
+      this.setData({ scrollToId: `msg-${lastId}` })
+    }
+  },
+
+  formatTime(time) {
+    if (!time) return ''
+    const date = new Date(time)
+    return `${String(date.getHours()).padStart(2, '0')}:${String(date.getMinutes()).padStart(2, '0')}`
   }
 })

@@ -1,2 +1,82 @@
 <!--pages/review/index.wxml-->
-<text>pages/review/index.wxml</text>
+<view class="container">
+  <view wx:if="{{order}}" class="review-form">
+    <view class="section">
+      <view class="section-title">商品信息</view>
+      <view class="goods-card" data-id="{{order.goodsId}}" bindtap="goToGoods">
+        <image class="goods-image" src="{{order.goodsInfo.images[0]}}" mode="aspectFill" />
+        <view class="goods-info">
+          <text class="goods-title">{{order.goodsInfo.title}}</text>
+          <text class="goods-price">¥{{(order.totalAmount / 100).toFixed(2)}}</text>
+        </view>
+      </view>
+    </view>
+
+    <view class="section">
+      <view class="section-title">商品评分</view>
+      <view class="rating-section">
+        <view class="star-group">
+          <view
+            wx:for="{{[1,2,3,4,5]}}"
+            wx:key="item"
+            class="star {{productRating >= item ? 'active' : ''}}"
+            data-rating="{{item}}"
+            bindtap="setProductRating"
+          >★</view>
+        </view>
+        <text class="rating-text">{{getRatingText(productRating)}}</text>
+      </view>
+    </view>
+
+    <view class="section">
+      <view class="section-title">卖家评分</view>
+      <view class="rating-section">
+        <view class="star-group">
+          <view
+            wx:for="{{[1,2,3,4,5]}}"
+            wx:key="item"
+            class="star {{sellerRating >= item ? 'active' : ''}}"
+            data-rating="{{item}}"
+            bindtap="setSellerRating"
+          >★</view>
+        </view>
+        <text class="rating-text">{{getRatingText(sellerRating)}}</text>
+      </view>
+    </view>
+
+    <view class="section">
+      <view class="section-title">评价内容</view>
+      <textarea
+        class="review-textarea"
+        placeholder="请输入您的评价内容（选填）"
+        value="{{content}}"
+        maxlength="500"
+        bindinput="onContentInput"
+      />
+      <text class="word-count">{{content.length}}/500</text>
+    </view>
+
+    <view class="section">
+      <view class="section-title">上传图片（选填）</view>
+      <view class="upload-section">
+        <view
+          wx:for="{{images}}"
+          wx:key="item"
+          wx:for-item="image"
+          wx:for-index="idx"
+          class="upload-item"
+        >
+          <image src="{{image}}" mode="aspectFill" />
+          <view class="remove-btn" data-index="{{idx}}" bindtap="removeImage">×</view>
+        </view>
+        <view wx:if="{{images.length < 9}}" class="upload-item add-btn" bindtap="chooseImage">
+          <text class="add-icon">+</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view class="bottom-bar">
+    <button class="submit-btn" bindtap="submitReview">提交评价</button>
+  </view>
+</view>

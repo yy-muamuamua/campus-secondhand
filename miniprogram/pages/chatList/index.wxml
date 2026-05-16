@@ -1,2 +1,41 @@
 <!--pages/chatList/index.wxml-->
-<text>pages/chatList/index.wxml</text>
+<view class="container">
+  <view wx:if="{{conversations.length === 0}}" class="empty-state">
+    <view class="empty-icon">💬</view>
+    <text class="empty-text">暂无聊天记录</text>
+    <text class="empty-hint">去逛逛商品，开始聊天吧</text>
+  </view>
+
+  <view wx:else class="chat-list">
+    <view
+      wx:for="{{conversations}}"
+      wx:key="_id"
+      class="chat-item"
+      data-id="{{item._id}}"
+      data-user="{{item.targetUser}}"
+      bindtap="goToChat"
+    >
+      <view class="avatar-wrap">
+        <image
+          class="avatar"
+          src="{{item.targetUser.avatar || '/images/default-avatar.png'}}"
+          mode="aspectFill"
+        />
+        <view wx:if="{{item.unreadCount > 0}}" class="badge">
+          {{item.unreadCount > 99 ? '99+' : item.unreadCount}}
+        </view>
+      </view>
+
+      <view class="chat-info">
+        <view class="chat-header">
+          <text class="chat-name">{{item.targetUser.nickname || '匿名用户'}}</text>
+          <text class="chat-time">{{formatTime(item.updateTime)}}</text>
+        </view>
+        <text class="chat-preview">
+          <text wx:if="{{item.lastMessage.content}}">{{item.lastMessage.content.length > 20 ? item.lastMessage.content.substring(0, 20) + '...' : item.lastMessage.content}}</text>
+          <text wx:else class="no-message">暂无消息</text>
+        </text>
+      </view>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,285 @@
+/* pages/orderDetail/index.wxss */
+.container {
+  min-height: 100vh;
+  background-color: #f5f5f5;
+  padding-bottom: 160rpx;
+}
+
+.status-bar {
+  display: flex;
+  align-items: center;
+  padding: 40rpx 30rpx;
+  margin-bottom: 20rpx;
+}
+
+.status-bar.pending_payment {
+  background: linear-gradient(135deg, #f56c6c, #f89898);
+}
+
+.status-bar.paid {
+  background: linear-gradient(135deg, #e6a23c, #f0c78a);
+}
+
+.status-bar.shipped {
+  background: linear-gradient(135deg, #1989fa, #6ab7ff);
+}
+
+.status-bar.received {
+  background: linear-gradient(135deg, #67c23a, #a8e063);
+}
+
+.status-bar.completed {
+  background: linear-gradient(135deg, #909399, #b4b8bf);
+}
+
+.status-bar.cancelled {
+  background: linear-gradient(135deg, #909399, #b4b8bf);
+}
+
+.status-bar.refunding {
+  background: linear-gradient(135deg, #e6a23c, #f0c78a);
+}
+
+.status-bar.refunded {
+  background: linear-gradient(135deg, #67c23a, #a8e063);
+}
+
+.status-icon {
+  font-size: 56rpx;
+  margin-right: 20rpx;
+}
+
+.status-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.status-text {
+  font-size: 32rpx;
+  font-weight: 600;
+  color: #ffffff;
+  margin-bottom: 8rpx;
+}
+
+.status-desc {
+  font-size: 24rpx;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.section {
+  background-color: #ffffff;
+  margin-bottom: 20rpx;
+  padding: 24rpx;
+}
+
+.section-title {
+  font-size: 28rpx;
+  font-weight: 600;
+  color: #333333;
+  margin-bottom: 20rpx;
+}
+
+.info-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 16rpx 0;
+  border-bottom: 1rpx solid #f5f5f5;
+}
+
+.info-item:last-child {
+  border-bottom: none;
+}
+
+.info-item.total .label {
+  font-size: 28rpx;
+  font-weight: 500;
+}
+
+.info-item.total .value {
+  font-size: 32rpx;
+  font-weight: 600;
+  color: #f56c6c;
+}
+
+.label {
+  font-size: 26rpx;
+  color: #999999;
+}
+
+.value {
+  font-size: 26rpx;
+  color: #333333;
+}
+
+.goods-card {
+  display: flex;
+  gap: 20rpx;
+  padding: 16rpx;
+  background-color: #fafafa;
+  border-radius: 12rpx;
+}
+
+.goods-image {
+  width: 160rpx;
+  height: 160rpx;
+  border-radius: 12rpx;
+  background-color: #ffffff;
+}
+
+.goods-detail {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.goods-title {
+  font-size: 28rpx;
+  font-weight: 500;
+  color: #333333;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.goods-desc {
+  font-size: 24rpx;
+  color: #999999;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.goods-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.goods-price {
+  font-size: 30rpx;
+  font-weight: 600;
+  color: #f56c6c;
+}
+
+.goods-quantity {
+  font-size: 24rpx;
+  color: #999999;
+}
+
+.user-card {
+  display: flex;
+  align-items: center;
+  gap: 20rpx;
+  padding: 20rpx;
+  background-color: #fafafa;
+  border-radius: 12rpx;
+}
+
+.avatar-wrap {
+  position: relative;
+}
+
+.avatar {
+  width: 80rpx;
+  height: 80rpx;
+  border-radius: 50%;
+  background-color: #ffffff;
+}
+
+.user-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 8rpx;
+}
+
+.user-name {
+  font-size: 28rpx;
+  font-weight: 500;
+  color: #333333;
+}
+
+.user-id {
+  font-size: 24rpx;
+  color: #999999;
+}
+
+.contact-btn {
+  padding: 16rpx 32rpx;
+  font-size: 26rpx;
+  background-color: #1989fa;
+  color: #ffffff;
+  border-radius: 32rpx;
+}
+
+.logistics-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 16rpx 0;
+  border-bottom: 1rpx solid #f5f5f5;
+}
+
+.logistics-item:last-child {
+  border-bottom: none;
+}
+
+.logistics-label {
+  font-size: 26rpx;
+  color: #999999;
+}
+
+.logistics-value {
+  font-size: 26rpx;
+  color: #333333;
+}
+
+.bottom-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20rpx 30rpx;
+  background-color: #ffffff;
+  border-top: 1rpx solid #eeeeee;
+  box-shadow: 0 -2rpx 10rpx rgba(0, 0, 0, 0.05);
+}
+
+.total-wrap {
+  display: flex;
+  align-items: baseline;
+}
+
+.total-label {
+  font-size: 26rpx;
+  color: #666666;
+}
+
+.total-price {
+  font-size: 36rpx;
+  font-weight: 600;
+  color: #f56c6c;
+}
+
+.actions {
+  display: flex;
+  gap: 20rpx;
+}
+
+.btn {
+  padding: 20rpx 40rpx;
+  font-size: 28rpx;
+  border-radius: 40rpx;
+  border: 1rpx solid #dddddd;
+  background-color: #ffffff;
+  color: #666666;
+}
+
+.btn.primary {
+  background-color: #1989fa;
+  border-color: #1989fa;
+  color: #ffffff;
+}

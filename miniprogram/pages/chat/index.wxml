@@ -1,2 +1,43 @@
 <!--pages/chat/index.wxml-->
-<text>pages/chat/index.wxml</text>
+<view class="container">
+  <scroll-view
+    class="message-list"
+    scroll-y
+    scroll-into-view="{{scrollToId}}"
+    scroll-with-animation
+  >
+    <view
+      wx:for="{{messages}}"
+      wx:key="_id"
+      id="msg-{{item._id}}"
+      class="message-item {{item.senderOpenid === openid ? 'self' : ''}}"
+    >
+      <image
+        class="avatar"
+        src="{{item.senderOpenid === openid ? (myAvatar || '/images/default-avatar.png') : (targetAvatar || targetUser.avatar || '/images/default-avatar.png')}}"
+        mode="aspectFill"
+      />
+      <view class="message-content">
+        <view class="message-bubble">
+          <text class="message-text">{{item.content}}</text>
+        </view>
+        <text class="message-time">{{formatTime(item.createTime)}}</text>
+      </view>
+    </view>
+  </scroll-view>
+
+  <view class="input-bar">
+    <input
+      class="message-input"
+      placeholder="输入消息..."
+      value="{{inputText}}"
+      maxlength="500"
+      bindinput="onInputChange"
+      bindconfirm="sendMessage"
+    />
+    <button
+      class="send-btn {{!inputText.trim() ? 'disabled' : ''}}"
+      bindtap="sendMessage"
+    >发送</button>
+  </view>
+</view>

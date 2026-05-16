@@ -1,66 +1,58 @@
 // pages/chatList/index.js
 Page({
-
-  /**
-   * 页面的初始数据
-   */
   data: {
-
+    conversations: []
   },
 
-  /**
-   * 生命周期函数--监听页面加载
-   */
-  onLoad(options) {
-
+  onLoad() {
+    this.loadConversations()
   },
 
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady() {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
   onShow() {
-
+    this.loadConversations()
   },
 
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide() {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload() {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
   onPullDownRefresh() {
-
+    this.loadConversations().then(() => {
+      wx.stopPullDownRefresh()
+    })
   },
 
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom() {
+  async loadConversations() {
+    try {
+      const res = await wx.cloud.callFunction({
+        name: 'getConversationList'
+      })
 
+      if (res.result.success) {
+        this.setData({
+          conversations: res.result.data
+        })
+      }
+    } catch (error) {
+      console.error('加载聊天列表失败', error)
+    }
   },
 
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage() {
+  goToChat(e) {
+    const conversationId = e.currentTarget.dataset.id
+    const user = e.currentTarget.dataset.user
+    wx.navigateTo({
+      url: `/pages/chat/index?conversationId=${conversationId}&nickname=${encodeURIComponent(user.nickname || '')}&avatar=${encodeURIComponent(user.avatar || '')}`
+    })
+  },
 
+  formatTime(time) {
+    if (!time) return ''
+    const date = new Date(time)
+    const now = new Date()
+    const diff = now.getTime() - date.getTime()
+
+    if (diff < 60000) return '刚刚'
+    if (diff < 3600000) return `${Math.floor(diff / 60000)}分钟前`
+    if (diff < 86400000) return `${Math.floor(diff / 3600000)}小时前`
+    if (diff < 604800000) return `${Math.floor(diff / 86400000)}天前`
+
+    return `${date.getMonth() + 1}-${date.getDate()}`
   }
 })
