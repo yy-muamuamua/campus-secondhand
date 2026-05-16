@@ -1,0 +1,7 @@
+{
+  "name": "cancelOrder",
+  "version": "1.0.0",
+  "description": "取消订单云函数",
+  "main": "index.js",
+  "dependencies": {}
+}

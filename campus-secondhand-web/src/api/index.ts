@@ -1,6 +1,0 @@
-export * from './auth'
-export * from './user'
-export * from './goods'
-export * from './favorites'
-export * from './messages'
-export * from './admin'

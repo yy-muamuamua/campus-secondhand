@@ -1,0 +1,7 @@
+{
+  "name": "getConversationList",
+  "version": "1.0.0",
+  "description": "获取聊天列表云函数",
+  "main": "index.js",
+  "dependencies": {}
+}

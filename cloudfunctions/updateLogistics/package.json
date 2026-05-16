@@ -1,0 +1,7 @@
+{
+  "name": "updateLogistics",
+  "version": "1.0.0",
+  "description": "更新物流信息云函数",
+  "main": "index.js",
+  "dependencies": {}
+}

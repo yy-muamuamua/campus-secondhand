@@ -1,0 +1,7 @@
+{
+  "name": "sellerShip",
+  "version": "1.0.0",
+  "description": "卖家发货云函数",
+  "main": "index.js",
+  "dependencies": {}
+}

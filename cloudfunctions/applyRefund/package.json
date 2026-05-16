@@ -1,0 +1,7 @@
+{
+  "name": "applyRefund",
+  "version": "1.0.0",
+  "description": "申请退款云函数",
+  "main": "index.js",
+  "dependencies": {}
+}

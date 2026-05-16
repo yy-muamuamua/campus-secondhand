@@ -1,66 +1,70 @@
 {
   "pages": [
     "pages/index/index",
-    "pages/example/index",
-    "pages/publish/publish",
-    "pages/detail/detail",
-    "pages/myGoods/myGoods",
-    "pages/profile/profile",
-    "pages/settings/settings",
-    "pages/editGoods/editGoods",
-    "pages/favorites/favorites",
-    "pages/myMessages/myMessages",
-    "pages/admin/admin",
-    "pages/login/login",
-    "pages/register/register",
-    "pages/verifyStudent/verifyStudent"
+    "pages/search/index",
+    "pages/category/index",
+    "pages/publish/index",
+    "pages/detail/index",
+    "pages/my/index",
+    "pages/login/index",
+    "pages/register/index",
+    "pages/profile/index",
+    "pages/favorites/index",
+    "pages/myGoods/index",
+    "pages/myMessages/index",
+    "pages/settings/index",
+    "pages/admin/index",
+    "pages/orderList/index",
+    "pages/orderDetail/index",
+    "pages/review/index",
+    "pages/chatList/index",
+    "pages/chat/index"
   ],
   "window": {
-    "backgroundColor": "#F6F6F6",
     "backgroundTextStyle": "light",
-    "navigationBarBackgroundColor": "#07c160",
-    "navigationBarTitleText": "校园二手",
-    "navigationBarTextStyle": "white"
+    "navigationBarBackgroundColor": "#ffffff",
+    "navigationBarTitleText": "校园二手交易平台",
+    "navigationBarTextStyle": "black",
+    "backgroundColor": "#f5f5f5"
   },
   "tabBar": {
-    "color": "#666",
-    "selectedColor": "#07c160",
-    "backgroundColor": "#fff",
+    "color": "#999999",
+    "selectedColor": "#1989fa",
     "borderStyle": "black",
+    "backgroundColor": "#ffffff",
     "list": [
       {
         "pagePath": "pages/index/index",
         "text": "首页",
-        "iconPath": "images/icons/home.png",
-        "selectedIconPath": "images/icons/home-active.png"
+        "iconPath": "images/tab/home.png",
+        "selectedIconPath": "images/tab/home-active.png"
       },
       {
-        "pagePath": "pages/myGoods/myGoods",
-        "text": "我的发布",
-        "iconPath": "images/icons/goods.png",
-        "selectedIconPath": "images/icons/goods-active.png"
+        "pagePath": "pages/search/index",
+        "text": "搜索",
+        "iconPath": "images/tab/search.png",
+        "selectedIconPath": "images/tab/search-active.png"
       },
       {
-        "pagePath": "pages/publish/publish",
+        "pagePath": "pages/publish/index",
         "text": "发布",
-        "iconPath": "images/icons/business.png",
-        "selectedIconPath": "images/icons/business-active.png"
+        "iconPath": "images/tab/publish.png",
+        "selectedIconPath": "images/tab/publish-active.png"
       },
       {
-        "pagePath": "pages/favorites/favorites",
-        "text": "收藏",
-        "iconPath": "images/icons/business.png",
-        "selectedIconPath": "images/icons/business-active.png"
+        "pagePath": "pages/orderList/index",
+        "text": "订单",
+        "iconPath": "images/tab/order.png",
+        "selectedIconPath": "images/tab/order-active.png"
       },
       {
-        "pagePath": "pages/profile/profile",
+        "pagePath": "pages/my/index",
         "text": "我的",
-        "iconPath": "images/icons/usercenter.png",
-        "selectedIconPath": "images/icons/usercenter-active.png"
+        "iconPath": "images/tab/my.png",
+        "selectedIconPath": "images/tab/my-active.png"
       }
     ]
   },
   "sitemapLocation": "sitemap.json",
-  "style": "v2",
-  "lazyCodeLoading": "requiredComponents"
+  "cloud": true
 }

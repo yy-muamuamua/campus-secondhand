@@ -1,0 +1,7 @@
+{
+  "name": "confirmReceipt",
+  "version": "1.0.0",
+  "description": "确认收货云函数",
+  "main": "index.js",
+  "dependencies": {}
+}
