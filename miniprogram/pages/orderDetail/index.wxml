@@ -68,7 +68,7 @@
         </view>
         <view class="user-info">
           <text class="user-name">{{seller.nickname || '匿名用户'}}</text>
-          <text class="user-id">{{seller.studentId ? `学号：${seller.studentId` : ''}}</text>
+          <text class="user-id">{{seller.studentId ? `学号：${seller.studentId}` : ''}}</text>
         </view>
         <button class="contact-btn" data-openid="{{seller.openid}}" bindtap="goToChat">联系卖家</button>
       </view>
