@@ -1,66 +1,40 @@
-// pages/myMessages/index.js
 Page({
-
-  /**
-   * 页面的初始数据
-   */
   data: {
-
+    messages: [],
+    loading: true
   },
 
-  /**
-   * 生命周期函数--监听页面加载
-   */
-  onLoad(options) {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady() {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
   onShow() {
-
+    this.loadMessages()
   },
 
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide() {
-
+  async loadMessages() {
+    this.setData({ loading: true })
+    try {
+      const res = await wx.cloud.callFunction({
+        name: 'getMyMessages',
+        data: {}
+      })
+      if (res.result.code === 0) {
+        this.setData({ messages: res.result.data, loading: false })
+      } else {
+        wx.showToast({ title: res.result.message, icon: 'none' })
+        this.setData({ loading: false })
+      }
+    } catch (err) {
+      console.error(err)
+      wx.showToast({ title: '网络错误', icon: 'none' })
+      this.setData({ loading: false })
+    }
   },
 
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload() {
-
+  goToDetail(e) {
+    const goodsId = e.currentTarget.dataset.id
+    wx.navigateTo({ url: `/pages/detail/index?goodsId=${goodsId}` })
   },
 
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh() {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom() {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage() {
-
+  formatTime(dateStr) {
+    const date = new Date(dateStr)
+    return `${date.getFullYear()}-${date.getMonth()+1}-${date.getDate()} ${date.getHours()}:${date.getMinutes()}`
   }
 })

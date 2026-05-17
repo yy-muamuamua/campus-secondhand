@@ -1,3 +1,8 @@
 {
-  "usingComponents": {}
+  "navigationBarTitleText": "设置",
+  "usingComponents": {
+    "mp-icon": "weui-miniprogram/icon/icon",
+    "mp-toast": "weui-miniprogram/toast/toast",
+    "mp-dialog": "weui-miniprogram/dialog/dialog"
+  }
 }

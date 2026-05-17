@@ -1,2 +1,80 @@
-<!--pages/profile/index.wxml-->
-<text>pages/profile/index.wxml</text>
+<view class="page">
+  <!-- 已登录状态 -->
+  <view class="header" wx:if="{{!loading && userInfo}}">
+    <view class="avatar">
+      <image src="{{userInfo.avatar || '/images/default-avatar.png'}}" mode="aspectFill" />
+    </view>
+    <view class="info">
+      <text class="nickname">{{userInfo.nickname || '微信用户'}}</text>
+      <view class="student">
+        <text wx:if="{{userInfo.email_verified && userInfo.student_id}}">学号：{{userInfo.student_id}}</text>
+        <text wx:else class="unverified">未绑定学号</text>
+        <button wx:if="{{!userInfo.email_verified || !userInfo.student_id}}" size="mini" bindtap="rebind">去绑定</button>
+      </view>
+    </view>
+  </view>
+
+  <!-- 未登录状态 -->
+  <view class="login-prompt-section" wx:if="{{!loading && !userInfo}}">
+    <view class="login-prompt" bindtap="goToLogin">
+      <view class="login-icon">
+        <mp-icon type="user" size="64" color="#ffffff" />
+      </view>
+      <view class="login-text">点击登录账号</view>
+    </view>
+  </view>
+
+  <view class="weui-panel" wx:if="{{!loading && userInfo}}">
+    <view class="weui-panel__hd">个人信息</view>
+    <view class="weui-panel__bd">
+      <view class="weui-cells weui-cells_access">
+        <view class="weui-cell" bindtap="goToEditProfile">
+          <view class="weui-cell__hd">
+            <mp-icon type="user" size="28" color="#1aad19" />
+          </view>
+          <view class="weui-cell__bd">编辑个人资料</view>
+          <view class="weui-cell__ft">
+            <mp-icon type="arrow" size="24" color="#999999" />
+          </view>
+        </view>
+        <view class="weui-cell" bindtap="goToChangePassword">
+          <view class="weui-cell__hd">
+            <mp-icon type="safe" size="28" color="#ff9900" />
+          </view>
+          <view class="weui-cell__bd">修改密码</view>
+          <view class="weui-cell__ft">
+            <mp-icon type="arrow" size="24" color="#999999" />
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view class="weui-panel" wx:if="{{!loading && userInfo}}">
+    <view class="weui-panel__hd">账号安全</view>
+    <view class="weui-panel__bd">
+      <view class="weui-cells weui-cells_access">
+        <view class="weui-cell" bindtap="goToBindStudentId">
+          <view class="weui-cell__hd">
+            <mp-icon type="contact" size="28" color="#1890ff" />
+          </view>
+          <view class="weui-cell__bd">绑定学号</view>
+          <view class="weui-cell__ft">
+            <mp-icon type="arrow" size="24" color="#999999" />
+          </view>
+        </view>
+        <view class="weui-cell" bindtap="goToBindPhone">
+          <view class="weui-cell__hd">
+            <mp-icon type="phone" size="28" color="#722ed1" />
+          </view>
+          <view class="weui-cell__bd">绑定手机号</view>
+          <view class="weui-cell__ft">
+            <mp-icon type="arrow" size="24" color="#999999" />
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view class="loading" wx:if="{{loading}}">加载中...</view>
+</view>

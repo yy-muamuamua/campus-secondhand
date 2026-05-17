@@ -28,7 +28,8 @@ exports.main = async (event, context) => {
       student_id: user.student_id || '',
       email_verified: user.email_verified || false,
       contact_wechat: user.contact_wechat || '',
-      contact_phone: user.contact_phone || ''
+      contact_phone: user.contact_phone || '',
+      isAdmin: user.isAdmin || false
     }
   }
 }

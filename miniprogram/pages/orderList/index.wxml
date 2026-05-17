@@ -93,5 +93,5 @@
   </view>
 
   <mp-toast id="toast" />
-  <mp-dialog show="{{showDialog}}" title="{{dialogTitle}}" content="{{dialogContent}}" bindbuttontap="onDialogTap" buttons="{{dialogButtons}}" />
+  <mp-dialog show="{{showDialog}}" title="{{dialogTitle}}" content="{{dialogContent}}" bindbuttontap="onDialogButtonTap" buttons="{{dialogButtons}}" />
 </view>

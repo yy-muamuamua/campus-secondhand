@@ -1,7 +1,9 @@
 {
-  "navigationBarTitleText": "基础能力",
+  "navigationBarTitleText": "校园二手交易平台",
   "usingComponents": {
     "cloud-tip-modal": "/components/cloudTipModal/index",
-    "mp-dialog": "weui-miniprogram/dialog/dialog"
+    "mp-dialog": "weui-miniprogram/dialog/dialog",
+    "mp-icon": "weui-miniprogram/icon/icon",
+    "mp-toast": "weui-miniprogram/toast/toast"
   }
 }

@@ -1,0 +1,9 @@
+{
+  "name": "adminDeleteMessage",
+  "version": "1.0.0",
+  "description": "删除留言",
+  "main": "index.js",
+  "dependencies": {
+    "wx-server-sdk": "~3.0.4"
+  }
+}

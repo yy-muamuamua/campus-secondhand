@@ -1,88 +1,99 @@
-<!--pages/settings/settings.wxml-->
 <view class="page">
-  <!-- 页面标题 -->
-  <view class="header">
-    <text class="title">设置</text>
+  <view class="weui-panel">
+    <view class="weui-panel__hd">通知设置</view>
+    <view class="weui-panel__bd">
+      <view class="weui-cells">
+        <view class="weui-cell" bindtap="toggleMessageNotificationTap">
+          <view class="weui-cell__hd">
+            <mp-icon type="message" size="28" color="{{messageNotification ? '#1aad19' : '#999999'}}" />
+          </view>
+          <view class="weui-cell__bd">
+            <view style="font-size: 28rpx; color: #333333;">消息通知</view>
+            <view style="font-size: 24rpx; color: #999999; margin-top: 8rpx;">接收聊天消息、评论回复等互动通知</view>
+          </view>
+          <view class="weui-cell__ft">
+            <switch 
+              class="weui-switch" 
+              checked="{{messageNotification}}" 
+              bindchange="toggleMessageNotification"
+            />
+          </view>
+        </view>
+        <view class="weui-cell" bindtap="toggleSystemNotificationTap">
+          <view class="weui-cell__hd">
+            <mp-icon type="info" size="28" color="{{systemNotification ? '#1890ff' : '#999999'}}" />
+          </view>
+          <view class="weui-cell__bd">
+            <view style="font-size: 28rpx; color: #333333;">系统通知</view>
+            <view style="font-size: 24rpx; color: #999999; margin-top: 8rpx;">接收订单状态、系统公告等重要通知</view>
+          </view>
+          <view class="weui-cell__ft">
+            <switch 
+              class="weui-switch" 
+              checked="{{systemNotification}}" 
+              bindchange="toggleSystemNotification"
+            />
+          </view>
+        </view>
+        <view class="weui-cell" bindtap="togglePushNotificationTap">
+          <view class="weui-cell__hd">
+            <mp-icon type="push" size="28" color="{{pushNotification ? '#722ed1' : '#999999'}}" />
+          </view>
+          <view class="weui-cell__bd">
+            <view style="font-size: 28rpx; color: #333333;">推送通知</view>
+            <view style="font-size: 24rpx; color: #999999; margin-top: 8rpx;">接收小程序服务通知推送</view>
+          </view>
+          <view class="weui-cell__ft">
+            <switch 
+              class="weui-switch" 
+              checked="{{pushNotification}}" 
+              bindchange="togglePushNotification"
+            />
+          </view>
+        </view>
+      </view>
+    </view>
   </view>
 
-  <!-- 设置菜单 -->
-  <view class="menu">
-    <!-- 个人信息设置 -->
-    <view class="menu-section">
-      <text class="section-title">个人信息</text>
-      <view class="menu-item" bindtap="goToEditProfile">
-        <text class="item-icon">👤</text>
-        <text class="item-text">编辑个人资料</text>
-        <text class="arrow">›</text>
+  <view class="weui-panel">
+    <view class="weui-panel__hd">关于</view>
+    <view class="weui-panel__bd">
+      <view class="weui-cells weui-cells_access">
+        <view class="weui-cell" bindtap="goToAbout">
+          <view class="weui-cell__hd">
+            <mp-icon type="info" size="28" color="#999999" />
+          </view>
+          <view class="weui-cell__bd">关于我们</view>
+          <view class="weui-cell__ft">
+            <mp-icon type="arrow" size="24" color="#999999" />
+          </view>
+        </view>
+        <view class="weui-cell" bindtap="goToFeedback">
+          <view class="weui-cell__hd">
+            <mp-icon type="edit" size="28" color="#1aad19" />
+          </view>
+          <view class="weui-cell__bd">意见反馈</view>
+          <view class="weui-cell__ft">
+            <mp-icon type="arrow" size="24" color="#999999" />
+          </view>
+        </view>
+        <view class="weui-cell" bindtap="goToPrivacy">
+          <view class="weui-cell__hd">
+            <mp-icon type="safe" size="28" color="#1890ff" />
+          </view>
+          <view class="weui-cell__bd">隐私政策</view>
+          <view class="weui-cell__ft">
+            <mp-icon type="arrow" size="24" color="#999999" />
+          </view>
+        </view>
       </view>
-      <view class="menu-item" bindtap="goToChangePassword">
-        <text class="item-icon">🔒</text>
-        <text class="item-text">修改密码</text>
-        <text class="arrow">›</text>
-      </view>
-    </view>
-
-    <!-- 账号安全 -->
-    <view class="menu-section">
-      <text class="section-title">账号安全</text>
-      <view class="menu-item" bindtap="goToBindEmail">
-        <text class="item-icon">📧</text>
-        <text class="item-text">绑定邮箱</text>
-        <text class="arrow">›</text>
-      </view>
-      <view class="menu-item" bindtap="goToBindPhone">
-        <text class="item-icon">📱</text>
-        <text class="item-text">绑定手机号</text>
-        <text class="arrow">›</text>
-      </view>
-    </view>
-
-    <!-- 通知设置 -->
-    <view class="menu-section">
-      <text class="section-title">通知设置</text>
-      <view class="menu-item" bindtap="toggleMessageNotification">
-        <text class="item-icon">💬</text>
-        <text class="item-text">消息通知</text>
-        <switch 
-          class="switch" 
-          checked="{{messageNotification}}" 
-          bindchange="toggleMessageNotification"
-        />
-      </view>
-      <view class="menu-item" bindtap="toggleSystemNotification">
-        <text class="item-icon">🔔</text>
-        <text class="item-text">系统通知</text>
-        <switch 
-          class="switch" 
-          checked="{{systemNotification}}" 
-          bindchange="toggleSystemNotification"
-        />
-      </view>
-    </view>
-
-    <!-- 关于我们 -->
-    <view class="menu-section">
-      <text class="section-title">关于</text>
-      <view class="menu-item" bindtap="goToAbout">
-        <text class="item-icon">ℹ️</text>
-        <text class="item-text">关于我们</text>
-        <text class="arrow">›</text>
-      </view>
-      <view class="menu-item" bindtap="goToFeedback">
-        <text class="item-icon">📝</text>
-        <text class="item-text">意见反馈</text>
-        <text class="arrow">›</text>
-      </view>
-      <view class="menu-item" bindtap="goToPrivacy">
-        <text class="item-icon">🔒</text>
-        <text class="item-text">隐私政策</text>
-        <text class="arrow">›</text>
-      </view>
-    </view>
-
-    <!-- 退出登录 -->
-    <view class="logout-section">
-      <button class="logout-btn" bindtap="logout">退出登录</button>
     </view>
   </view>
+
+  <view class="logout-section">
+    <button class="weui-btn weui-btn_default" bindtap="logout">退出登录</button>
+  </view>
+
+  <mp-toast id="toast" />
+  <mp-dialog show="{{showDialog}}" title="{{dialogTitle}}" content="{{dialogContent}}" bindbuttontap="onDialogTap" buttons="{{dialogButtons}}" />
 </view>

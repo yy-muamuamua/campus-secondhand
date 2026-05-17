@@ -1,0 +1,140 @@
+.page {
+  min-height: 100vh;
+  background: #f5f5f5;
+  padding: 20px;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 40rpx;
+  padding-top: 40rpx;
+}
+
+.title {
+  font-size: 48rpx;
+  font-weight: 600;
+  color: #333333;
+}
+
+.weui-cells {
+  margin-top: 0;
+  border-radius: 16rpx;
+  overflow: hidden;
+}
+
+.weui-cell {
+  padding: 24rpx 32rpx;
+}
+
+.weui-label {
+  width: 140rpx;
+  font-size: 28rpx;
+  color: #333333;
+}
+
+.weui-input {
+  font-size: 28rpx;
+  color: #333333;
+  height: 80rpx;
+  line-height: 80rpx;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.toggle-text {
+  font-size: 26rpx;
+  color: #576b95;
+  padding: 0 10rpx;
+}
+
+.password-strength {
+  padding: 10rpx 32rpx;
+  background: #ffffff;
+  font-size: 24rpx;
+  color: #999;
+}
+
+.strength-weak {
+  color: #ff4d4f;
+  font-weight: 500;
+}
+
+.strength-medium {
+  color: #faad14;
+  font-weight: 500;
+}
+
+.strength-strong {
+  color: #52c41a;
+  font-weight: 500;
+}
+
+.weui-btn_mini {
+  padding: 0 24rpx;
+  font-size: 24rpx;
+  line-height: 2;
+}
+
+.agreement {
+  margin: 30rpx 0;
+  padding: 0 20rpx;
+}
+
+.agreement-label {
+  display: flex;
+  align-items: flex-start;
+  font-size: 24rpx;
+  color: #666;
+  line-height: 1.6;
+}
+
+.agreement-label checkbox {
+  margin-right: 10rpx;
+  margin-top: 4rpx;
+}
+
+.link {
+  color: #576b95;
+  margin: 0 4rpx;
+}
+
+.btn-area {
+  margin-top: 40rpx;
+  padding: 0 20rpx;
+}
+
+.weui-btn {
+  margin-bottom: 24rpx;
+  border-radius: 8rpx;
+}
+
+.weui-btn_primary {
+  background-color: #1aad19;
+}
+
+.weui-btn_primary:not(.weui-btn_disabled):active {
+  background-color: #129611;
+}
+
+.weui-btn_primary.weui-btn_disabled {
+  background-color: #cccccc;
+  color: #999999;
+}
+
+.weui-btn_default {
+  background-color: #ffffff;
+  color: #1aad19;
+  border: 1rpx solid #1aad19;
+}
+
+.tips {
+  margin-top: 40rpx;
+  padding: 0 20rpx;
+  text-align: center;
+}
+
+.tip-text {
+  font-size: 24rpx;
+  color: #999999;
+  line-height: 1.6;
+}

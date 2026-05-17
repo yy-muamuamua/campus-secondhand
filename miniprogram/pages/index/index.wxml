@@ -1,5 +1,4 @@
 <view class="page">
-  <!-- 头部：分类切换和搜索 -->
   <view class="header">
     <scroll-view scroll-x class="category-scroll">
       <view class="category-list">
@@ -14,18 +13,17 @@
     </scroll-view>
     <view class="filter-icons">
       <view class="icon-item" bindtap="toggleSortPanel">
-        <text>🔽</text>
+        <mp-icon type="sort" size="24" color="{{showSortPanel ? '#1aad19' : '#999999'}}" />
       </view>
       <view class="icon-item" bindtap="togglePriceFilter">
-        <text>💰</text>
+        <mp-icon type="filter" size="24" color="{{showPriceFilter ? '#1aad19' : '#999999'}}" />
       </view>
       <view class="search-icon" bindtap="showSearch">
-        <text>🔍</text>
+        <mp-icon type="search" size="24" color="#999999" />
       </view>
     </view>
   </view>
 
-  <!-- 排序面板（下拉） -->
   <view class="sort-panel" wx:if="{{showSortPanel}}">
     <view 
       wx:for="{{sortOptions}}" 
@@ -36,32 +34,30 @@
     >{{item.label}}</view>
   </view>
 
-  <!-- 价格筛选面板 -->
   <view class="price-filter" wx:if="{{showPriceFilter}}">
     <view class="price-inputs">
-      <input placeholder="最低价" type="number" bindinput="onMinPriceInput" value="{{minPrice}}" />
+      <input class="weui-input" placeholder="最低价" type="number" bindinput="onMinPriceInput" value="{{minPrice}}" />
       <text>—</text>
-      <input placeholder="最高价" type="number" bindinput="onMaxPriceInput" value="{{maxPrice}}" />
+      <input class="weui-input" placeholder="最高价" type="number" bindinput="onMaxPriceInput" value="{{maxPrice}}" />
     </view>
     <view class="price-actions">
-      <button size="mini" bindtap="clearPriceFilter">清除</button>
-      <button size="mini" type="primary" bindtap="applyPriceFilter">确定</button>
+      <button class="weui-btn weui-btn_mini weui-btn_default" bindtap="clearPriceFilter">清除</button>
+      <button class="weui-btn weui-btn_mini weui-btn_primary" bindtap="applyPriceFilter">确定</button>
     </view>
   </view>
 
-  <!-- 搜索框（条件显示） -->
   <view class="search-box" wx:if="{{showSearchInput}}">
     <input 
+      class="weui-input"
       placeholder="输入商品名称" 
       bindinput="onSearchInput" 
       value="{{keyword}}"
       confirm-type="search"
       bindconfirm="onSearch"
     />
-    <button size="mini" bindtap="hideSearch">取消</button>
+    <button class="weui-btn weui-btn_mini weui-btn_default" bindtap="hideSearch">取消</button>
   </view>
 
-  <!-- 商品列表 -->
   <view class="goods-list">
     <view 
       wx:for="{{goodsList}}" 
@@ -81,13 +77,20 @@
     </view>
   </view>
 
-  <!-- 加载状态 -->
-  <view class="loading" wx:if="{{loading}}">加载中...</view>
-  <view class="no-more" wx:if="{{!hasMore && goodsList.length > 0}}">没有更多了</view>
-  <view class="empty" wx:if="{{!loading && goodsList.length == 0}}">暂无商品</view>
-
-  <!-- 悬浮发布按钮 -->
-  <view class="publish-btn" bindtap="goToPublish">
-    <text>+</text>
+  <view class="weui-loadmore" wx:if="{{loading}}">
+    <view class="weui-loading"></view>
+    <view class="weui-loadmore__tips">加载中...</view>
   </view>
+  <view class="weui-loadmore" wx:if="{{!hasMore && goodsList.length > 0}}">
+    <view class="weui-loadmore__tips">没有更多了</view>
+  </view>
+  <view class="weui-loadmore" wx:if="{{!loading && goodsList.length == 0}}">
+    <view class="weui-loadmore__tips">暂无商品</view>
+  </view>
+
+  <view class="fab-button" bindtap="goToPublish">
+    <mp-icon type="plus" size="32" color="#ffffff" />
+  </view>
+
+  <mp-toast id="toast" />
 </view>

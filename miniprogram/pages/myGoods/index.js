@@ -1,66 +1,118 @@
-// pages/myGoods/index.js
 Page({
-
-  /**
-   * 页面的初始数据
-   */
   data: {
-
+    goodsList: [],
+    loading: true
   },
 
-  /**
-   * 生命周期函数--监听页面加载
-   */
-  onLoad(options) {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady() {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
   onShow() {
-
+    this.loadMyGoods()
   },
 
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide() {
-
+  async loadMyGoods() {
+    this.setData({ loading: true })
+    try {
+      const res = await wx.cloud.callFunction({
+        name: 'getMyGoods',
+        data: {}
+      })
+      if (res.result.code === 0) {
+        this.setData({ goodsList: res.result.data, loading: false })
+      } else {
+        wx.showToast({ title: res.result.message, icon: 'none' })
+        this.setData({ loading: false })
+      }
+    } catch (err) {
+      console.error(err)
+      wx.showToast({ title: '网络错误', icon: 'none' })
+      this.setData({ loading: false })
+    }
   },
 
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload() {
-
+  goToEdit(e) {
+    const goodsId = e.currentTarget.dataset.id
+    wx.navigateTo({
+      url: `/pages/editGoods/editGoods?goodsId=${goodsId}`
+    })
   },
 
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh() {
-
+  async offShelf(e) {
+    const goodsId = e.currentTarget.dataset.id
+    wx.showModal({
+      title: '提示',
+      content: '确定下架该商品吗？',
+      success: async (res) => {
+        if (res.confirm) {
+          try {
+            const callRes = await wx.cloud.callFunction({
+              name: 'updateGoods',
+              data: { goodsId, status: 'off' }
+            })
+            if (callRes.result.code === 0) {
+              wx.showToast({ title: '已下架', icon: 'success' })
+              this.loadMyGoods()
+            } else {
+              wx.showToast({ title: callRes.result.message, icon: 'none' })
+            }
+          } catch (err) {
+            console.error(err)
+            wx.showToast({ title: '操作失败', icon: 'none' })
+          }
+        }
+      }
+    })
   },
 
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom() {
-
+  async deleteGoods(e) {
+    const goodsId = e.currentTarget.dataset.id
+    wx.showModal({
+      title: '提示',
+      content: '确定删除该商品吗？删除后不可恢复。',
+      success: async (res) => {
+        if (res.confirm) {
+          try {
+            const callRes = await wx.cloud.callFunction({
+              name: 'deleteGoods',
+              data: { goodsId }
+            })
+            if (callRes.result.code === 0) {
+              wx.showToast({ title: '已删除', icon: 'success' })
+              this.loadMyGoods()
+            } else {
+              wx.showToast({ title: callRes.result.message, icon: 'none' })
+            }
+          } catch (err) {
+            console.error(err)
+            wx.showToast({ title: '操作失败', icon: 'none' })
+          }
+        }
+      }
+    })
   },
 
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage() {
-
+  async markAsSold(e) {
+    const goodsId = e.currentTarget.dataset.id
+    wx.showModal({
+      title: '提示',
+      content: '确定将该商品标记为已售吗？',
+      success: async (res) => {
+        if (res.confirm) {
+          try {
+            const callRes = await wx.cloud.callFunction({
+              name: 'updateGoods',
+              data: { goodsId, status: 'sold' }
+            })
+            if (callRes.result.code === 0) {
+              wx.showToast({ title: '已标记', icon: 'success' })
+              this.loadMyGoods()
+            } else {
+              wx.showToast({ title: callRes.result.message, icon: 'none' })
+            }
+          } catch (err) {
+            console.error(err)
+            wx.showToast({ title: '操作失败', icon: 'none' })
+          }
+        }
+      }
+    })
   }
 })

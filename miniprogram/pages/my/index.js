@@ -9,6 +9,19 @@ Page({
     this.loadUserInfo()
   },
 
+  showToast(message, icon = 'none') {
+    const toast = this.selectComponent('#toast')
+    if (toast) {
+      toast.show({
+        msg: message,
+        icon: icon === 'success' ? 'success' : 'warn',
+        duration: icon === 'success' ? 1500 : 2000
+      })
+    } else {
+      wx.showToast({ title: message, icon: 'none' })
+    }
+  },
+
   async loadUserInfo() {
     this.setData({ loading: true })
     try {
@@ -19,18 +32,18 @@ Page({
       if (res.result.code === 0) {
         this.setData({ userInfo: res.result.data, loading: false })
       } else {
-        wx.showToast({ title: res.result.message, icon: 'none' })
+        this.showToast(res.result.message)
         this.setData({ loading: false })
       }
     } catch (err) {
       console.error(err)
-      wx.showToast({ title: '网络错误', icon: 'none' })
+      this.showToast('网络错误')
       this.setData({ loading: false })
     }
   },
 
   goToMyGoods() {
-    wx.navigateTo({ url: '/pages/myGoods/myGoods' })
+    wx.navigateTo({ url: '/pages/myGoods/index' })
   },
 
   goToSettings() {
@@ -42,7 +55,7 @@ Page({
   },
 
   goToMyMessages() {
-    wx.navigateTo({ url: '/pages/myMessages/myMessages' })
+    wx.navigateTo({ url: '/pages/myMessages/index' })
   },
 
   goToAdmin() {
@@ -50,6 +63,13 @@ Page({
   },
 
   goToProfile() {
-    wx.navigateTo({ url: '/pages/profile/profile' })
+    wx.navigateTo({ url: '/pages/profile/index' })
+  },
+
+  goToOrderList(e) {
+    const type = e.currentTarget.dataset.type || ''
+    wx.navigateTo({ 
+      url: type ? `/pages/orderList/index?type=${type}` : '/pages/orderList/index' 
+    })
   }
 })

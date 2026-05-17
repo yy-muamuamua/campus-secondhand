@@ -207,7 +207,7 @@ Page({
   buyAgain(e) {
     const order = e.currentTarget.dataset.order
     wx.navigateTo({
-      url: '/pages/detail/detail?goodsId=' + order.goodsId
+      url: '/pages/detail/index?goodsId=' + order.goodsId
     })
   },
 

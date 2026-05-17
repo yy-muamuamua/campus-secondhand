@@ -3,22 +3,23 @@
     "pages/index/index",
     "pages/search/index",
     "pages/category/index",
-    "pages/publish/publish",
-    "pages/detail/detail",
+    "pages/publish/index",
+    "pages/detail/index",
     "pages/my/index",
-    "pages/login/login",
-    "pages/register/register",
-    "pages/profile/profile",
+    "pages/login/index",
+    "pages/register/index",
+    "pages/profile/index",
     "pages/favorites/favorites",
-    "pages/myGoods/myGoods",
-    "pages/myMessages/myMessages",
+    "pages/myGoods/index",
+    "pages/myMessages/index",
     "pages/settings/settings",
     "pages/admin/admin",
     "pages/orderList/index",
     "pages/orderDetail/index",
     "pages/review/index",
     "pages/chatList/index",
-    "pages/chat/index"
+    "pages/chat/index",
+    "pages/verifyStudent/index"
   ],
   "useExtendedLib": {
     "weui": true
@@ -49,7 +50,7 @@
         "selectedIconPath": "images/tab/search-active.png"
       },
       {
-        "pagePath": "pages/publish/publish",
+        "pagePath": "pages/publish/index",
         "text": "发布",
         "iconPath": "images/tab/publish.png",
         "selectedIconPath": "images/tab/publish-active.png"

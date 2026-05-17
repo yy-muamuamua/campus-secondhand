@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "我的",
+  "usingComponents": {
+    "mp-icon": "weui-miniprogram/icon/icon",
+    "mp-toast": "weui-miniprogram/toast/toast"
+  }
+}

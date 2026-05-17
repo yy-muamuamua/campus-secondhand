@@ -1,37 +1,65 @@
 <view class="page">
   <view class="search-bar">
-    <input
-      class="search-input"
-      placeholder="搜索商品"
-      value="{{keyword}}"
-      bindinput="onSearchInput"
-      bindconfirm="handleSearch"
-    />
-    <button size="mini" bindtap="handleSearch">搜索</button>
-    <button size="mini" bindtap="clearKeyword" wx:if="{{keyword}}">清除</button>
+    <view class="search-input-wrap">
+      <mp-icon type="search" size="24" color="#999999" />
+      <input
+        class="weui-input"
+        placeholder="搜索商品"
+        value="{{keyword}}"
+        bindinput="onSearchInput"
+        bindconfirm="handleSearch"
+      />
+      <mp-icon 
+        type="clear" 
+        size="24" 
+        color="#999999" 
+        wx:if="{{keyword}}" 
+        bindtap="clearKeyword" 
+      />
+    </view>
+    <button class="weui-btn weui-btn_primary" bindtap="handleSearch" disabled="{{!keyword.trim()}}">搜索</button>
   </view>
 
   <view class="search-results">
     <view
       wx:for="{{searchResults}}"
       wx:key="_id"
-      class="goods-item"
+      class="weui-panel weui-panel_access goods-item"
       data-id="{{item._id}}"
       bindtap="goToDetail"
     >
-      <image src="{{item.images && item.images[0] ? item.images[0] : '/images/default.png'}}" mode="aspectFill" />
-      <view class="info">
-        <text class="title">{{item.title}}</text>
-        <text class="price">¥{{item.price}}</text>
-        <text class="status-tag" wx:if="{{item.status !== 'on'}}">
-          {{item.status === 'sold' ? '已售' : '已下架'}}
-        </text>
+      <view class="weui-panel__bd">
+        <view class="weui-media-box weui-media-box_appmsg">
+          <view class="weui-media-box__hd">
+            <image class="weui-media-box__thumb" src="{{item.images && item.images[0] ? item.images[0] : '/images/default.png'}}" mode="aspectFill" />
+          </view>
+          <view class="weui-media-box__bd">
+            <view class="weui-media-box__title">{{item.title}}</view>
+            <view class="weui-media-box__desc">
+              <text class="price">¥{{item.price}}</text>
+              <text class="status-tag" wx:if="{{item.status !== 'on'}}">
+                {{item.status === 'sold' ? '已售' : '已下架'}}
+              </text>
+            </view>
+          </view>
+        </view>
       </view>
     </view>
   </view>
 
-  <view class="loading" wx:if="{{loading}}">加载中...</view>
-  <view class="no-more" wx:if="{{!hasMore && searchResults.length > 0}}">没有更多了</view>
-  <view class="empty" wx:if="{{!loading && searchResults.length === 0 && keyword}}">未找到相关商品</view>
-  <view class="empty" wx:if="{{!loading && searchResults.length === 0 && !keyword}}">请输入搜索关键词</view>
+  <view class="weui-loadmore" wx:if="{{loading}}">
+    <view class="weui-loading"></view>
+    <view class="weui-loadmore__tips">加载中...</view>
+  </view>
+  <view class="weui-loadmore" wx:if="{{!hasMore && searchResults.length > 0}}">
+    <view class="weui-loadmore__tips">没有更多了</view>
+  </view>
+  <view class="empty-state" wx:if="{{!loading && searchResults.length === 0}}">
+    <view class="empty-icon">
+      <mp-icon type="search" size="64" color="#cccccc" />
+    </view>
+    <view class="empty-text">{{keyword ? '未找到相关商品' : '请输入搜索关键词'}}</view>
+  </view>
+
+  <mp-toast id="toast" />
 </view>

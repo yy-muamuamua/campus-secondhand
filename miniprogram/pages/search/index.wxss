@@ -1,0 +1,143 @@
+/* 搜索页面样式 - WeUI风格 */
+.page {
+  min-height: 100vh;
+  background: #f5f5f5;
+}
+
+.search-bar {
+  background: #ffffff;
+  padding: 24rpx 32rpx;
+  display: flex;
+  align-items: center;
+  gap: 24rpx;
+  border-bottom: 1rpx solid #e5e5e5;
+}
+
+.search-input-wrap {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  background: #f5f5f5;
+  border-radius: 8rpx;
+  padding: 0 24rpx;
+  height: 80rpx;
+  gap: 16rpx;
+}
+
+.search-input-wrap .weui-input {
+  flex: 1;
+  font-size: 28rpx;
+  border: none;
+  background: transparent;
+  height: 80rpx;
+  line-height: 80rpx;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.weui-btn {
+  padding: 0 32rpx;
+  height: 80rpx;
+  line-height: 80rpx;
+  font-size: 28rpx;
+  border-radius: 8rpx;
+}
+
+.weui-btn_primary {
+  background-color: #1aad19;
+}
+
+.weui-btn_disabled {
+  background-color: #d9d9d9;
+}
+
+.search-results {
+  padding: 24rpx;
+}
+
+.goods-item {
+  margin-bottom: 24rpx;
+  background: #ffffff;
+  border-radius: 16rpx;
+  overflow: hidden;
+}
+
+.weui-media-box__thumb {
+  width: 160rpx;
+  height: 160rpx;
+}
+
+.weui-media-box__title {
+  font-size: 28rpx;
+  color: #333333;
+  font-weight: 500;
+}
+
+.weui-media-box__desc {
+  display: flex;
+  align-items: center;
+  gap: 16rpx;
+  margin-top: 8rpx;
+}
+
+.price {
+  font-size: 32rpx;
+  color: #ff6600;
+  font-weight: 600;
+}
+
+.status-tag {
+  font-size: 22rpx;
+  color: #999999;
+  padding: 4rpx 12rpx;
+  background: #f5f5f5;
+  border-radius: 4rpx;
+}
+
+.weui-loadmore {
+  text-align: center;
+  padding: 40rpx 0;
+}
+
+.weui-loading {
+  display: inline-block;
+  width: 32rpx;
+  height: 32rpx;
+  border: 3rpx solid #d9d9d9;
+  border-top-color: #1aad19;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-right: 16rpx;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.weui-loadmore__tips {
+  font-size: 28rpx;
+  color: #999999;
+}
+
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 120rpx 0;
+}
+
+.empty-icon {
+  width: 160rpx;
+  height: 160rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f5f5f5;
+  border-radius: 50%;
+  margin-bottom: 32rpx;
+}
+
+.empty-text {
+  font-size: 28rpx;
+  color: #999999;
+}

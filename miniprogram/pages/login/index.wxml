@@ -1,2 +1,50 @@
-<!--pages/login/index.wxml-->
-<text>pages/login/index.wxml</text>
+<view class="page">
+  <view class="login-container">
+    <view class="header">
+      <text class="title">校园二手交易平台</text>
+      <text class="subtitle">登录您的账号</text>
+    </view>
+
+    <view class="weui-cells weui-cells_form">
+      <view class="weui-cell">
+        <view class="weui-cell__hd">
+          <view class="weui-label">邮箱</view>
+        </view>
+        <view class="weui-cell__bd">
+          <input class="weui-input" placeholder="请输入邮箱" bindinput="bindEmailInput" value="{{email}}" type="text" />
+        </view>
+      </view>
+      <view class="weui-cell">
+        <view class="weui-cell__hd">
+          <view class="weui-label">密码</view>
+        </view>
+        <view class="weui-cell__bd">
+          <input class="weui-input" placeholder="请输入密码" bindinput="bindPasswordInput" value="{{password}}" password="{{!showPassword}}" />
+        </view>
+        <view class="weui-cell__ft" bindtap="togglePassword">
+          <text class="toggle-text">{{showPassword ? '隐藏' : '显示'}}</text>
+        </view>
+      </view>
+    </view>
+
+    <view class="agreement">
+      <checkbox-group bindchange="onAgreementChange">
+        <label class="agreement-label">
+          <checkbox value="agreed" checked="{{agreed}}" />
+          <text>我已阅读并同意</text>
+          <text class="link" bindtap="showUserAgreement">《用户协议》</text>
+          <text>和</text>
+          <text class="link" bindtap="showPrivacyPolicy">《隐私政策》</text>
+        </label>
+      </checkbox-group>
+    </view>
+
+    <view class="btn-area">
+      <button class="weui-btn weui-btn_primary" bindtap="submitLogin" disabled="{{isLoading || !agreed}}">
+        {{isLoading ? '登录中...' : '登录'}}
+      </button>
+      <button class="weui-btn weui-btn_default" bindtap="goToRegister">没有账号？去注册</button>
+    </view>
+  </view>
+
+</view>

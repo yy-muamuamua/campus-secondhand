@@ -1,0 +1,233 @@
+.page {
+  padding-bottom: 140rpx;
+  min-height: 100vh;
+  background: #f5f5f5;
+}
+
+swiper {
+  height: 600rpx;
+}
+
+swiper image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.info-box {
+  background: #fff;
+  padding: 30rpx;
+}
+
+.title {
+  font-size: 36rpx;
+  font-weight: bold;
+  display: block;
+  margin-bottom: 20rpx;
+}
+
+.price {
+  font-size: 48rpx;
+  font-weight: bold;
+  color: #ff6a6a;
+  display: block;
+  margin-bottom: 20rpx;
+}
+
+.description {
+  font-size: 28rpx;
+  color: #666;
+  display: block;
+  margin-bottom: 20rpx;
+  line-height: 1.6;
+}
+
+.meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20rpx;
+  font-size: 24rpx;
+  color: #999;
+}
+
+.seller-box {
+  margin-top: 20rpx;
+  background: #fff;
+  padding: 30rpx;
+}
+
+.label {
+  font-size: 28rpx;
+  font-weight: bold;
+  color: #333;
+  display: block;
+  margin-bottom: 20rpx;
+}
+
+.seller {
+  display: flex;
+  align-items: center;
+}
+
+.seller image {
+  width: 80rpx;
+  height: 80rpx;
+  border-radius: 50%;
+  margin-right: 20rpx;
+}
+
+.seller .info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 8rpx;
+}
+
+.seller .info text {
+  font-size: 28rpx;
+  color: #333;
+}
+
+.loading {
+  text-align: center;
+  padding: 100rpx 0;
+  color: #999;
+}
+
+.action-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: #fff;
+  padding: 20rpx;
+  padding-bottom: calc(20rpx + env(safe-area-inset-bottom));
+  display: flex;
+  gap: 20rpx;
+  box-shadow: 0 -2rpx 12rpx rgba(0,0,0,0.08);
+  z-index: 1000;
+}
+
+.action-bar button {
+  flex: 1;
+}
+
+.seller-action {
+  padding: 20rpx;
+  margin-bottom: 100rpx;
+}
+
+.message-section {
+  margin-top: 20rpx;
+  background: #fff;
+  padding: 30rpx;
+  margin-bottom: 100rpx;
+}
+
+.section-title {
+  font-size: 28rpx;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 20rpx;
+}
+
+.message-list {
+  margin-bottom: 30rpx;
+}
+
+.message-item {
+  padding: 20rpx 0;
+  border-bottom: 1rpx solid #eee;
+}
+
+.message-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10rpx;
+}
+
+.avatar {
+  width: 60rpx;
+  height: 60rpx;
+  border-radius: 50%;
+  margin-right: 15rpx;
+}
+
+.nickname {
+  font-size: 28rpx;
+  font-weight: 500;
+  color: #333;
+  flex: 1;
+}
+
+.time {
+  font-size: 24rpx;
+  color: #999;
+}
+
+.message-content {
+  font-size: 28rpx;
+  color: #333;
+  margin-left: 75rpx;
+  margin-bottom: 10rpx;
+  line-height: 1.5;
+}
+
+.reply-box {
+  background: #f5f5f5;
+  padding: 15rpx;
+  border-radius: 8rpx;
+  margin-left: 75rpx;
+  margin-top: 10rpx;
+}
+
+.reply-label {
+  font-size: 24rpx;
+  font-weight: 500;
+  color: #07c160;
+  margin-right: 10rpx;
+}
+
+.reply-time {
+  font-size: 24rpx;
+  color: #999;
+  margin-top: 8rpx;
+  display: block;
+  text-align: right;
+}
+
+.reply-action {
+  margin-left: 75rpx;
+  margin-top: 10rpx;
+}
+
+.reply-input-area {
+  display: flex;
+  align-items: center;
+  gap: 10rpx;
+  margin-left: 75rpx;
+  margin-top: 10rpx;
+  padding: 10rpx;
+  background: #f5f5f5;
+  border-radius: 8rpx;
+}
+
+.reply-input-area input {
+  flex: 1;
+  background: transparent;
+  border: none;
+}
+
+.message-input {
+  display: flex;
+  gap: 15rpx;
+  align-items: flex-end;
+}
+
+.message-input textarea {
+  flex: 1;
+  min-height: 80rpx;
+  padding: 15rpx;
+  background: #f5f5f5;
+  border-radius: 8rpx;
+}

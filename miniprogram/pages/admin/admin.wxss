@@ -106,8 +106,11 @@
   font-size: 28rpx;
   color: #07c160;
 }
-.loading-more, .no-more {
+.loading-more, .no-more, .empty {
   text-align: center;
-  padding: 20rpx;
+  padding: 80rpx 20rpx;
   color: #999;
+}
+.empty {
+  font-size: 28rpx;
 }

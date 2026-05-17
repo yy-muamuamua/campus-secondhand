@@ -1,66 +1,80 @@
-// pages/profile/index.js
 Page({
-
-  /**
-   * 页面的初始数据
-   */
   data: {
-
+    userInfo: null,
+    loading: true
   },
 
-  /**
-   * 生命周期函数--监听页面加载
-   */
-  onLoad(options) {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady() {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
   onShow() {
-
+    this.loadUserInfo()
   },
 
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide() {
-
+  async loadUserInfo() {
+    this.setData({ loading: true })
+    // 先从本地存储读取用户信息
+    const localUserInfo = wx.getStorageSync('userInfo')
+    if (localUserInfo) {
+      console.log('从本地存储读取用户信息:', localUserInfo)
+      this.setData({ userInfo: localUserInfo, loading: false })
+    }
+    
+    try {
+      const res = await wx.cloud.callFunction({
+        name: 'getUserInfo',
+        data: {}
+      })
+      if (res.result.code === 0) {
+        const userInfo = res.result.data
+        this.setData({ userInfo, loading: false })
+        // 更新本地存储
+        wx.setStorageSync('userInfo', userInfo)
+      } else {
+        if (!localUserInfo) {
+          this.setData({ userInfo: null, loading: false })
+        }
+      }
+    } catch (err) {
+      console.error(err)
+      if (!localUserInfo) {
+        this.setData({ userInfo: null, loading: false })
+      }
+    }
   },
 
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload() {
-
+  goToLogin() {
+    wx.navigateTo({
+      url: '/pages/login/index'
+    })
   },
 
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh() {
-
+  rebind() {
+    wx.navigateTo({ url: '/pages/verifyStudent/index' })
   },
 
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom() {
-
+  goToEditProfile() {
+    wx.showModal({
+      title: '提示',
+      content: '编辑个人资料功能正在开发中',
+      showCancel: false
+    })
   },
 
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage() {
+  goToChangePassword() {
+    wx.showModal({
+      title: '提示',
+      content: '修改密码功能正在开发中',
+      showCancel: false
+    })
+  },
 
-  }
+  goToBindStudentId() {
+    wx.navigateTo({ url: '/pages/verifyStudent/index' })
+  },
+
+  goToBindPhone() {
+    wx.showModal({
+      title: '提示',
+      content: '绑定手机号功能正在开发中',
+      showCancel: false
+    })
+  },
 })

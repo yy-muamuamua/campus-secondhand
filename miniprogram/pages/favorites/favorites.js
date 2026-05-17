@@ -31,6 +31,6 @@ Page({
   // 跳转到商品详情
   goToDetail(e) {
     const goodsId = e.currentTarget.dataset.id
-    wx.navigateTo({ url: `/pages/detail/detail?goodsId=${goodsId}` })
+    wx.navigateTo({ url: `/pages/detail/index?goodsId=${goodsId}` })
   }
 })

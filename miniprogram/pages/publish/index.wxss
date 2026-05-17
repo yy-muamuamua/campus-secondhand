@@ -27,12 +27,19 @@
 .weui-input {
   font-size: 28rpx;
   color: #333333;
+  height: 80rpx;
+  line-height: 80rpx;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 .weui-textarea {
   font-size: 28rpx;
   color: #333333;
   min-height: 160rpx;
+  line-height: 1.6;
+  padding: 16rpx 0;
+  box-sizing: border-box;
 }
 
 .weui-cell__ft {

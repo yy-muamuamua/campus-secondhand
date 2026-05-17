@@ -1,2 +1,76 @@
-<!--pages/register/index.wxml-->
-<text>pages/register/index.wxml</text>
+<view class="page">
+  <view class="header">
+    <text class="title">注册账号</text>
+  </view>
+
+  <view class="weui-cells weui-cells_form">
+    <view class="weui-cell">
+      <view class="weui-cell__hd">
+        <view class="weui-label">邮箱</view>
+      </view>
+      <view class="weui-cell__bd">
+        <input class="weui-input" placeholder="请输入邮箱" bindinput="bindEmailInput" value="{{email}}" type="text" />
+      </view>
+    </view>
+    <view class="weui-cell">
+      <view class="weui-cell__hd">
+        <view class="weui-label">密码</view>
+      </view>
+      <view class="weui-cell__bd">
+        <input class="weui-input" placeholder="请输入密码（至少6位）" bindinput="bindPasswordInput" value="{{password}}" password="{{!showPassword}}" />
+      </view>
+      <view class="weui-cell__ft" bindtap="togglePassword">
+        <text class="toggle-text">{{showPassword ? '隐藏' : '显示'}}</text>
+      </view>
+    </view>
+    <view class="password-strength" wx:if="{{password}}">
+      <text>密码强度：</text>
+      <text class="strength-{{passwordStrength}}">{{passwordStrengthText}}</text>
+    </view>
+    <view class="weui-cell">
+      <view class="weui-cell__hd">
+        <view class="weui-label">确认密码</view>
+      </view>
+      <view class="weui-cell__bd">
+        <input class="weui-input" placeholder="请再次输入密码" bindinput="bindConfirmPasswordInput" value="{{confirmPassword}}" password="{{!showPassword}}" />
+      </view>
+    </view>
+    <view class="weui-cell">
+      <view class="weui-cell__hd">
+        <view class="weui-label">验证码</view>
+      </view>
+      <view class="weui-cell__bd">
+        <input class="weui-input" placeholder="请输入验证码" bindinput="bindVerificationCodeInput" value="{{verificationCode}}" type="number" />
+      </view>
+      <view class="weui-cell__ft">
+        <button class="weui-btn weui-btn_mini weui-btn_default" bindtap="sendVerificationCode" disabled="{{countdown > 0 || isLoading || !email}}">
+          {{countdown > 0 ? countdown + 's' : '获取验证码'}}
+        </button>
+      </view>
+    </view>
+  </view>
+
+  <view class="agreement">
+    <checkbox-group bindchange="onAgreementChange">
+      <label class="agreement-label">
+        <checkbox value="agreed" checked="{{agreed}}" />
+        <text>我已阅读并同意</text>
+        <text class="link" bindtap="showUserAgreement">《用户协议》</text>
+        <text>和</text>
+        <text class="link" bindtap="showPrivacyPolicy">《隐私政策》</text>
+      </label>
+    </checkbox-group>
+  </view>
+
+  <view class="btn-area">
+    <button class="weui-btn weui-btn_primary" bindtap="submitRegister" disabled="{{isLoading || !agreed}}">
+      {{isLoading ? '注册中...' : '注册'}}
+    </button>
+    <button class="weui-btn weui-btn_default" bindtap="goToLogin">已有账号？去登录</button>
+  </view>
+
+  <view class="tips">
+    <text class="tip-text">验证邮箱后，您需要完成学生认证才能发布商品和留言</text>
+  </view>
+
+</view>

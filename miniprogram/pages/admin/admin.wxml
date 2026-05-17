@@ -54,8 +54,9 @@
         </view>
       </view>
     </view>
-    <view class="loading-more" wx:if="{{loading}}">加载中...</view>
-    <view class="no-more" wx:if="{{!hasMore && goodsList.length > 0}}">没有更多了</view>
+    <view class="empty" wx:if="{{!loadingGoods && goodsList.length === 0}}">暂无商品</view>
+    <view class="loading-more" wx:if="{{loadingGoods}}">加载中...</view>
+    <view class="no-more" wx:if="{{!hasMoreGoods && goodsList.length > 0}}">没有更多了</view>
   </view>
 
   <!-- 用户管理面板（类似结构） -->
@@ -74,6 +75,7 @@
         </view>
       </view>
     </view>
+    <view class="empty" wx:if="{{!loadingUsers && userList.length === 0}}">暂无用户</view>
     <view class="loading-more" wx:if="{{loadingUsers}}">加载中...</view>
     <view class="no-more" wx:if="{{!hasMoreUsers && userList.length > 0}}">没有更多了</view>
   </view>
@@ -93,6 +95,7 @@
         </view>
       </view>
     </view>
+    <view class="empty" wx:if="{{!loadingMessages && messageList.length === 0}}">暂无留言</view>
     <view class="loading-more" wx:if="{{loadingMessages}}">加载中...</view>
     <view class="no-more" wx:if="{{!hasMoreMessages && messageList.length > 0}}">没有更多了</view>
   </view>

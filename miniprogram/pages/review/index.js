@@ -117,7 +117,7 @@ Page({
   goToGoods(e) {
     const goodsId = e.currentTarget.dataset.id
     wx.navigateTo({
-      url: '/pages/detail/detail?goodsId=' + goodsId
+      url: '/pages/detail/index?goodsId=' + goodsId
     })
   },
 
